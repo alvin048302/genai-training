@@ -33,7 +33,7 @@ html,body{font-family:'Outfit',sans-serif;background:#E8EDF4;min-height:100vh;ov
 .hd::after{content:'';flex:1;height:1px;background:var(--rule)}
 .lbl{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent,var(--m1))}
 h2{font-family:'Fraunces',serif;font-size:clamp(1.3rem,4.5vw,1.75rem);font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:6px}
-.sub{font-size:12.5px;color:var(--ink2);line-height:1.7;margin-bottom:16px}
+.sub{font-size:14px;color:var(--ink2);line-height:1.7;margin-bottom:16px}
 [data-m="1"]{--accent:var(--m1)}
 [data-m="2"]{--accent:var(--m2)}
 [data-m="3"]{--accent:var(--m3)}
@@ -294,7 +294,7 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.3rem,4.5vw,1.75rem);font-weigh
    ═══════════════════════════════════════════ */
 .act-color{--act:#7C3AED;--actl:#EDE9FE}
 .act-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.act-time{display:inline-flex;align-items:center;gap:4px;background:var(--actl);border-radius:12px;padding:3px 10px;font-size:10px;font-weight:600;color:var(--act)}
+.act-time{display:inline-flex;align-items:center;gap:4px;background:var(--actl);border-radius:12px;padding:4px 11px;font-size:10.5px;font-weight:600;color:var(--act)}
 .act-num{font-size:10px;color:var(--ink3);font-weight:600;margin-bottom:4px;letter-spacing:.06em}
 .act-lbl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--act)}
 
@@ -311,9 +311,9 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.3rem,4.5vw,1.75rem);font-weigh
 .act-sn.active{background:var(--act)}
 .act-sn.done{background:#10B981}
 .act-step-content{flex:1;min-width:0}
-.act-step-q{font-size:11px;color:var(--ink2);line-height:1.5;margin-bottom:5px}
+.act-step-q{font-size:13px;color:var(--ink2);line-height:1.5;margin-bottom:5px}
 .act-step-q strong{color:var(--ink)}
-.act-step-btn{background:var(--act);color:white;border:none;border-radius:7px;padding:8px 13px;font-size:11.5px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .2s;font-family:'Outfit',sans-serif}
+.act-step-btn{background:var(--act);color:white;border:none;border-radius:7px;padding:9px 14px;font-size:12.5px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .2s;font-family:'Outfit',sans-serif}
 .act-step-btn:hover:not(:disabled){background:#6D28D9;transform:translateY(-1px)}
 .act-step-btn:disabled{background:#CBD5E1;cursor:not-allowed}
 
@@ -322,8 +322,8 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.3rem,4.5vw,1.75rem);font-weigh
 .act-response.visible{display:block;animation:actSlideIn .35s ease both}
 @keyframes actSlideIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
 .act-r-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
-.act-r-prov{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px}
-.act-r-text{font-size:11.5px;line-height:1.62;color:var(--ink);white-space:pre-wrap;word-wrap:break-word}
+.act-r-prov{font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px}
+.act-r-text{font-size:13px;line-height:1.62;color:var(--ink);white-space:pre-wrap;word-wrap:break-word}
 
 /* Loading dots */
 .act-loading{display:flex;align-items:center;gap:5px;padding:6px 0}
@@ -338,37 +338,37 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.3rem,4.5vw,1.75rem);font-weigh
 .act-reveal{padding:13px 15px;border-radius:9px;border-left:3px solid var(--act);background:var(--actl);display:none;margin-bottom:12px;gap:10px;align-items:flex-start}
 .act-reveal.visible{display:flex;animation:actSlideIn .5s ease both}
 .act-reveal-icon{font-size:1.3rem;flex-shrink:0}
-.act-reveal h4{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
-.act-reveal p{font-size:11.5px;line-height:1.65}
+.act-reveal h4{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.act-reveal p{font-size:13px;line-height:1.65}
 
 /* Side-by-side layout */
 .act-sbs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
 .act-sbs-card{background:var(--off);border:1px solid var(--rule);border-radius:9px;padding:12px;display:flex;flex-direction:column;gap:6px}
 .act-sbs-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-.act-sbs-body{font-size:11.5px;line-height:1.6;color:var(--ink);min-height:80px;flex:1}
+.act-sbs-body{font-size:13px;line-height:1.6;color:var(--ink);min-height:80px;flex:1}
 .act-sbs-loading{display:flex;align-items:center;gap:5px;min-height:80px}
 
 /* 3 columns */
 .act-col3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:12px}
 .act-col3-card{background:var(--off);border:1px solid var(--rule);border-radius:9px;padding:11px;display:flex;flex-direction:column;gap:6px}
 .act-col3-label{font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-.act-col3-body{font-size:11px;line-height:1.58;color:var(--ink);min-height:80px;flex:1}
-.act-col3-bullet{display:flex;gap:5px;align-items:flex-start;font-size:11px;line-height:1.5;color:var(--ink2);margin-bottom:4px}
+.act-col3-body{font-size:12.5px;line-height:1.58;color:var(--ink);min-height:80px;flex:1}
+.act-col3-bullet{display:flex;gap:5px;align-items:flex-start;font-size:12.5px;line-height:1.5;color:var(--ink2);margin-bottom:4px}
 .act-col3-bullet::before{content:'•';font-weight:700;flex-shrink:0;color:var(--act)}
 
 /* Try your own (collapsible) */
 .tryown{margin-bottom:12px}
-.tryown-toggle{width:100%;background:white;border:1px dashed var(--rule);border-radius:8px;padding:10px 14px;font-size:11.5px;font-weight:600;color:var(--ink2);cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:'Outfit',sans-serif;transition:all .2s}
+.tryown-toggle{width:100%;background:white;border:1px dashed var(--rule);border-radius:8px;padding:11px 15px;font-size:12.5px;font-weight:600;color:var(--ink2);cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:'Outfit',sans-serif;transition:all .2s}
 .tryown-toggle:hover{border-color:var(--act);color:var(--act)}
 .tryown-toggle .chev{transition:transform .25s}
 .tryown.open .tryown-toggle .chev{transform:rotate(180deg)}
 .tryown-content{display:none;padding:14px;background:var(--off);border:1px solid var(--rule);border-top:none;border-radius:0 0 8px 8px}
 .tryown.open .tryown-content{display:block;animation:actSlideIn .3s ease both}
 .tryown-content label{display:block;font-size:10.5px;font-weight:600;color:var(--ink2);margin-bottom:5px}
-.tryown-content textarea{width:100%;padding:9px 11px;border:1px solid var(--rule);border-radius:6px;font-family:'Outfit',sans-serif;font-size:12px;line-height:1.5;resize:vertical;min-height:60px;background:white}
+.tryown-content textarea{width:100%;padding:10px 12px;border:1px solid var(--rule);border-radius:6px;font-family:'Outfit',sans-serif;font-size:16px;line-height:1.5;resize:vertical;min-height:70px;background:white;-webkit-text-size-adjust:100%}
 .tryown-content textarea:focus{outline:none;border-color:var(--act)}
 .tryown-hint{font-size:10px;color:var(--ink3);margin-top:4px;line-height:1.4;font-style:italic}
-.tryown-run{background:var(--act);color:white;border:none;border-radius:6px;padding:8px 14px;font-size:11.5px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;margin-top:9px}
+.tryown-run{background:var(--act);color:white;border:none;border-radius:6px;padding:9px 15px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;margin-top:9px}
 .tryown-run:hover{background:#6D28D9}
 .tryown-run:disabled{opacity:.5;cursor:not-allowed}
 
@@ -376,7 +376,7 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.3rem,4.5vw,1.75rem);font-weigh
 .act-notice{background:white;border:1px solid var(--rule);border-radius:8px;padding:11px 13px;margin-bottom:12px}
 .act-notice-h{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--act);margin-bottom:6px}
 .act-notice ul{list-style:none;display:flex;flex-direction:column;gap:5px}
-.act-notice li{font-size:11.5px;color:var(--ink2);display:flex;gap:7px;line-height:1.5;align-items:flex-start}
+.act-notice li{font-size:13px;color:var(--ink2);display:flex;gap:7px;line-height:1.5;align-items:flex-start}
 .act-notice li::before{content:'✓';color:var(--act);font-weight:700;flex-shrink:0}
 
 /* Facilitator notes */
@@ -409,6 +409,20 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.3rem,4.5vw,1.75rem);font-weigh
   .act-sbs,.act-col3{grid-template-columns:1fr}
 }
 
+
+/* Closing slide — FORGE bonus CTA */
+.close-cta{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#4F46E5 0%,#7C3AED 100%);color:white;border:none;border-radius:12px;padding:14px 18px;cursor:pointer;font-family:'Outfit',sans-serif;margin:0 auto 22px;max-width:380px;width:100%;box-shadow:0 4px 14px rgba(79,70,229,.3);transition:all .25s;position:relative;text-align:left}
+.close-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(79,70,229,.4)}
+.close-cta .cta-icon{font-size:1.5rem;flex-shrink:0}
+.close-cta .cta-text{flex:1;font-size:14px;font-weight:600;line-height:1.2}
+.close-cta .cta-sub{display:block;font-size:11px;font-weight:400;opacity:.85;margin-top:2px;letter-spacing:.02em}
+.close-cta .cta-arrow{font-size:1.4rem;transition:transform .25s}
+.close-cta:hover .cta-arrow{transform:translateX(4px)}
+.close-cta .cta-text + .cta-sub{display:block}
+
+/* Wrap text inside button correctly */
+.close-cta .cta-text-wrap{display:flex;flex-direction:column;flex:1}
+
 </style>
 </head>
 <body>
@@ -428,14 +442,14 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.3rem,4.5vw,1.75rem);font-weigh
       <div class="cname"><strong>Alvin Nambiar</strong><br>L&D Professional · Financial Services · AI Practitioner</div>
     </div>
     <div class="cover-r">
-      <div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px">Six Modules</div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px">Five Modules + Bonus</div>
       <div class="modlist">
         <div class="modi"><div class="modi-d" style="background:var(--m1)"></div><span class="modi-n">01</span><span class="modi-t">What Is Gen AI</span></div>
         <div class="modi"><div class="modi-d" style="background:var(--m2)"></div><span class="modi-n">02</span><span class="modi-t">How Gen AI Helps</span></div>
         <div class="modi"><div class="modi-d" style="background:var(--m3)"></div><span class="modi-n">03</span><span class="modi-t">Limitations &amp; Risks</span></div>
         <div class="modi"><div class="modi-d" style="background:var(--m4)"></div><span class="modi-n">04</span><span class="modi-t">Safeguards &amp; Use</span></div>
-        <div class="modi"><div class="modi-d" style="background:var(--m5)"></div><span class="modi-n">05</span><span class="modi-t">FORGE Application</span></div>
-        <div class="modi"><div class="modi-d" style="background:var(--m6)"></div><span class="modi-n">06</span><span class="modi-t">The Way Forward</span><span class="modi-o">Optional</span></div>
+        <div class="modi"><div class="modi-d" style="background:var(--m6)"></div><span class="modi-n">05</span><span class="modi-t">The Way Forward</span></div>
+        <div class="modi" style="border-style:dashed;background:#FAFBFD"><div class="modi-d" style="background:var(--m5)"></div><span class="modi-n">★</span><span class="modi-t">FORGE Case Study</span><span class="modi-o" style="background:#EDE9FE;color:#7C3AED">Bonus</span></div>
       </div>
     </div>
   </div>
@@ -680,18 +694,7 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.3rem,4.5vw,1.75rem);font-weigh
       </ul>
     </div>
 
-    <button class="facil-toggle" onclick="toggleFacil('m1-facil')">🎯 Show facilitator notes</button>
-    <div class="facil" id="m1-facil">
-      <div class="facil-h">🎯 Facilitator Notes</div>
-      <div class="facil-section"><div class="facil-st">Setup</div><ul><li>Set 5-minute timer</li><li>Tell learners to compare the two answers — what's the same? what's different?</li></ul></div>
-      <div class="facil-section"><div class="facil-st">Debrief questions</div>
-        <p class="facil-q">"Were both answers correct?"</p>
-        <p class="facil-q">"If you used this in a report — which version would you use?"</p>
-        <p class="facil-q">"What does this tell you about AI being 'right' or 'wrong'?"</p>
-      </div>
-      <div class="facil-section"><div class="facil-st">Key insight</div><ul><li>AI has no fixed answer. It generates. This is why you must judge output — not assume it's the same as the last time you asked.</li></ul></div>
     </div>
-  </div>
 </div>
 
 
@@ -1106,18 +1109,7 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.3rem,4.5vw,1.75rem);font-weigh
       </ul>
     </div>
 
-    <button class="facil-toggle" onclick="toggleFacil('m2-facil')">🎯 Show facilitator notes</button>
-    <div class="facil" id="m2-facil">
-      <div class="facil-h">🎯 Facilitator Notes</div>
-      <div class="facil-section"><div class="facil-st">Setup</div><ul><li>Pre-loaded article is ready — no paste needed for Quick Start</li><li>Encourage learners to paste their own work email or article</li></ul></div>
-      <div class="facil-section"><div class="facil-st">Debrief questions</div>
-        <p class="facil-q">"How long would these three versions have taken you to write manually?"</p>
-        <p class="facil-q">"Which version is closest to what you'd actually send?"</p>
-        <p class="facil-q">"Where in your work this week could you use this?"</p>
-      </div>
-      <div class="facil-section"><div class="facil-st">Key insight</div><ul><li>Speed + personalisation in one task. The bottleneck shifts from writing to judging which version to use.</li></ul></div>
     </div>
-  </div>
 </div>
 
 
@@ -1284,18 +1276,7 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.3rem,4.5vw,1.75rem);font-weigh
       </ul>
     </div>
 
-    <button class="facil-toggle" onclick="toggleFacil('m3-facil')">🎯 Show facilitator notes</button>
-    <div class="facil" id="m3-facil">
-      <div class="facil-h">🎯 Facilitator Notes</div>
-      <div class="facil-section"><div class="facil-st">During</div><ul><li>Step 1 — AI says "Biden" confidently. In 2026, everyone knows this is wrong.</li><li>Step 2 — AI invents an election result. Names, percentages, "historic moments" — all fabricated.</li><li>Note the variation across the room — different learners may get different invented results.</li></ul></div>
-      <div class="facil-section"><div class="facil-st">Debrief questions</div>
-        <p class="facil-q">"How sure did the AI sound in Step 1?"</p>
-        <p class="facil-q">"In Step 2 — what specific details did it invent?"</p>
-        <p class="facil-q">"Where in YOUR work could a confidently-wrong AI answer cause a real problem?"</p>
-      </div>
-      <div class="facil-section"><div class="facil-st">Key insight</div><ul><li>Confidence ≠ accuracy. The danger isn't AI being unsure — it's AI being confidently outdated or wrong.</li></ul></div>
     </div>
-  </div>
 </div>
 
 
@@ -1470,37 +1451,162 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.3rem,4.5vw,1.75rem);font-weigh
       </ul>
     </div>
 
-    <button class="facil-toggle" onclick="toggleFacil('m4-facil')">🎯 Show facilitator notes</button>
-    <div class="facil" id="m4-facil">
-      <div class="facil-h">🎯 Facilitator Notes</div>
-      <div class="facil-section"><div class="facil-st">During</div><ul><li>Read both prompts aloud before clicking — let learners predict the difference</li><li>The contrast in output quality is the lesson</li></ul></div>
-      <div class="facil-section"><div class="facil-st">Debrief questions</div>
-        <p class="facil-q">"Could you use the vague result as-is? What would you need to change?"</p>
-        <p class="facil-q">"What made the specific prompt work better?"</p>
-        <p class="facil-q">"What 5 elements made the specific prompt good — audience, length, tone, format, what else?"</p>
+    </div>
+</div>
+
+
+<!-- ░░░ S20: M6 DIVIDER (OPTIONAL) ░░░ -->
+<div class="slide" data-index="25" data-m="6">
+  <div class="top-bar">
+    <div class="sc" id="sc25"></div>
+    </div>
+  <div class="div-grid">
+    <div class="div-l"><div class="div-idx" style="color:var(--m6)">Module 05</div><div class="div-num">05</div></div>
+    <div class="div-r">
+      <div class="div-t">The Way<br>Forward</div>
+      <p class="div-d">How Singapore is approaching AI, what AI literacy actually means for everyday professionals, and where the biggest career opportunity sits.</p>
+      <div class="dtags"><span class="dtag">Singapore strategy</span><span class="dtag">AI literacy</span><span class="dtag">Domain + AI</span></div>
       </div>
-      <div class="facil-section"><div class="facil-st">Key insight</div><ul><li>Prompting is the skill. Invest 20 extra seconds writing a better prompt — save 10 minutes editing a poor output.</li></ul></div>
+  </div>
+</div>
+
+<!-- ░░░ S21: SINGAPORE ░░░ -->
+<div class="slide" data-index="26" data-m="6">
+  <div class="top-bar"><div class="sc" id="sc26"></div><div class="mb" style="background:var(--m6)">Module 5</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">Singapore context</span></div>
+    <h2>How Singapore is approaching AI</h2>
+    <p class="sub">A deliberate, top-down national strategy — building AI capability into every workforce, not just the tech sector.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7);padding:12px">
+        <div class="sg-vis">
+          <div class="sg-row pop" data-d="100"><div class="ic">🇸🇬</div><div><h4>National AI Strategy 2.0</h4><p>Develop AI safely. Position Singapore as a globally trusted AI hub.</p></div></div>
+          <div class="sg-row pop" data-d="220"><div class="ic">📚</div><div><h4>SkillsFuture &amp; SSG</h4><p>Building AI literacy across the entire workforce — not just tech roles.</p></div></div>
+          <div class="sg-row pop" data-d="340"><div class="ic">🏦</div><div><h4>Budget 2026 — National AI Missions</h4><p>Finance, healthcare, manufacturing, logistics — four sector priorities.</p></div></div>
+          <div class="sg-row pop" data-d="460"><div class="ic">🎓</div><div><h4>NTU AI literacy mandate</h4><p>Every undergraduate must complete an AI module — embedded as a baseline.</p></div></div>
+        </div>
+      </div>
+      <div class="vis-cap">A clear national signal — AI literacy is now a baseline expectation</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🏗️</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Like <strong>Singapore building an MRT system before private cars filled the streets</strong>. The infrastructure is being laid down ahead of need. Those who learn to use it early move faster than those who wait.</p>
+      </div>
     </div>
   </div>
 </div>
 
+<!-- ░░░ S22: AI LITERACY ░░░ -->
+<div class="slide" data-index="27" data-m="6">
+  <div class="top-bar"><div class="sc" id="sc27"></div><div class="mb" style="background:var(--m6)">Module 5</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">What AI literacy means</span></div>
+    <h2>Five levels of being AI-literate</h2>
+    <p class="sub">You don't need to be a data scientist. You need to be a <strong>thoughtful user</strong>.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7);padding:12px">
+        <div class="lit-vis">
+          <div class="lit-step fade-up" data-d="100"><div class="lit-n">1</div><div class="lit-text">Understand what AI is</div><div class="lit-bar"><div style="width:20%"></div></div></div>
+          <div class="lit-step fade-up" data-d="240"><div class="lit-n">2</div><div class="lit-text">Use it for real tasks</div><div class="lit-bar"><div style="width:40%"></div></div></div>
+          <div class="lit-step fade-up" data-d="380"><div class="lit-n">3</div><div class="lit-text">Spot when it's wrong</div><div class="lit-bar"><div style="width:60%"></div></div></div>
+          <div class="lit-step fade-up" data-d="520"><div class="lit-n">4</div><div class="lit-text">Apply governance principles</div><div class="lit-bar"><div style="width:80%"></div></div></div>
+          <div class="lit-step fade-up" data-d="660"><div class="lit-n">5</div><div class="lit-text">Translate AI for others</div><div class="lit-bar"><div style="width:100%"></div></div></div>
+        </div>
+      </div>
+      <div class="vis-cap">Each step builds on the last — start where you are</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🚴</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Like <strong>learning to cycle</strong>. First you balance. Then you pedal. Then you steer. Then you avoid traffic. Then you teach someone else. <strong>The fifth level — teaching others — is where the rare talent sits.</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S23: BRIDGE ░░░ -->
+<div class="slide" data-index="28" data-m="6">
+  <div class="top-bar"><div class="sc" id="sc28"></div><div class="mb" style="background:var(--m6)">Module 5</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">The opportunity</span></div>
+    <h2>Domain expertise + AI capability</h2>
+    <p class="sub">The most valuable professional in this era is not the AI expert. It's <strong>the domain expert who knows how to use AI</strong>.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7);padding:14px">
+        <div class="bridge-vis">
+          <div class="br-side fly-in" data-d="100">
+            <div class="br-icon">🏦</div>
+            <div class="br-name">Domain Expertise</div>
+            <div class="br-sub">Industry knowledge<br>Stakeholder dynamics<br>Real-world judgment</div>
+          </div>
+          <div class="br-plus pop" data-d="500">+</div>
+          <div class="br-side fly-in-r" data-d="900">
+            <div class="br-icon">🤖</div>
+            <div class="br-name">AI Capability</div>
+            <div class="br-sub">Effective prompting<br>Critical evaluation<br>Building real tools</div>
+          </div>
+        </div>
+      </div>
+      <div class="vis-cap">Two halves — that together do what neither can alone</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🏛️</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Like a <strong>doctor who can also use modern equipment</strong>. The equipment doesn't replace the doctor. But the doctor who knows how to use it sees what others miss — and treats more patients better. <strong>The same shift is happening in every profession.</strong></p>
+      </div>
+    </div>
+
+    <div class="impacts">
+      <div class="imp"><div class="imp-i">🎯</div><div><h4>Where the biggest opportunity sits</h4><p>The career advantage isn't in becoming an AI expert. It's in becoming the <strong>domain professional in your field who has clearly learned to use AI well</strong>.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S24: CLOSING ░░░ -->
+<div class="slide" data-index="29" data-m="0">
+  <div class="top-bar"><div class="sc" id="sc29"></div></div>
+  <div class="close-w">
+    <div style="width:32px;height:1px;background:var(--rule);margin:0 auto 28px;position:relative"></div>
+    <div class="close-q">"The question isn't whether AI will change your work. It already has. The question is whether you will be someone who shapes that change — or someone it simply happens to."</div>
+    <div class="close-name">Alvin Nambiar</div>
+    <div class="close-role">L&D Professional · Financial Services · AI Practitioner</div>
+    <button class="close-cta" onclick="go(30)">
+      <span class="cta-icon">📘</span>
+      <span class="cta-text-wrap"><span class="cta-text">Read the Case Study</span><span class="cta-sub">FORGE — AI applied to L&D in practice</span></span>
+      <span class="cta-arrow">→</span>
+    </button>
+    <div class="close-chips">
+      <span class="close-chip">📘 Generative AI for Working Professionals</span>
+    </div>
+  </div>
+</div>
 
 <!-- ░░░ S17: M5 DIVIDER (FORGE) ░░░ -->
-<div class="slide" data-index="25" data-m="5">
-  <div class="top-bar"><div class="sc" id="sc25"></div></div>
+<div class="slide" data-index="30" data-m="5">
+  <div class="top-bar"><div class="sc" id="sc30"></div></div>
   <div class="div-grid">
-    <div class="div-l"><div class="div-idx">Module 05</div><div class="div-num">05</div></div>
+    <div class="div-l"><div class="div-idx" style="color:var(--m5)">Bonus Reading</div><div class="div-num">★</div></div>
     <div class="div-r">
-      <div class="div-t">Real Application<br>— FORGE</div>
-      <p class="div-d">A practical example of Gen AI applied to a real workplace problem: building learning materials fast, at scale, from a single brief.</p>
-      <div class="dtags"><span class="dtag">Case study</span><span class="dtag">Fast &amp; scalable</span><span class="dtag">Real output</span></div>
+      <div class="div-t">FORGE<br>Case Study</div>
+      <p class="div-d">A practical example of Gen AI applied to a real workplace problem: building learning materials fast, at scale, from a single brief. This is what happens when the principles from this deck meet a real production tool.</p>
+      <div class="dtags"><span class="dtag">Bonus content</span><span class="dtag">AI applied to L&amp;D</span><span class="dtag">Production tool</span></div>
     </div>
   </div>
 </div>
 
 <!-- ░░░ S18: FORGE HERO ░░░ -->
-<div class="slide" data-index="26" data-m="5">
-  <div class="top-bar"><div class="sc" id="sc26"></div><div class="mb" style="background:var(--m5)">Module 5</div></div>
+<div class="slide" data-index="31" data-m="5">
+  <div class="top-bar"><div class="sc" id="sc31"></div><div class="mb" style="background:var(--m5)">Bonus</div></div>
   <div class="body">
     <div class="hd"><span class="lbl">Case study — FORGE</span></div>
     <h2>From a brief to a programme — in minutes</h2>
@@ -1541,8 +1647,8 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.3rem,4.5vw,1.75rem);font-weigh
 </div>
 
 <!-- ░░░ S19: FORGE IN PRACTICE ░░░ -->
-<div class="slide" data-index="27" data-m="5">
-  <div class="top-bar"><div class="sc" id="sc27"></div><div class="mb" style="background:var(--m5)">Module 5</div></div>
+<div class="slide" data-index="32" data-m="5">
+  <div class="top-bar"><div class="sc" id="sc32"></div><div class="mb" style="background:var(--m5)">Bonus</div></div>
   <div class="body">
     <div class="hd"><span class="lbl">How it delivers</span></div>
     <h2>Fast. Scalable. Real outputs.</h2>
@@ -1574,143 +1680,6 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.3rem,4.5vw,1.75rem);font-weigh
   </div>
 </div>
 
-<!-- ░░░ S20: M6 DIVIDER (OPTIONAL) ░░░ -->
-<div class="slide" data-index="28" data-m="6">
-  <div class="top-bar">
-    <div class="sc" id="sc28"></div>
-    <button class="optskip" onclick="go(32)">Skip to Close →</button>
-  </div>
-  <div class="div-grid">
-    <div class="div-l"><div class="div-idx">Module 06</div><div class="div-num">06</div></div>
-    <div class="div-r">
-      <div class="div-t">The Way<br>Forward</div>
-      <p class="div-d">How Singapore is approaching AI, what AI literacy actually means for everyday professionals, and where the biggest career opportunity sits.</p>
-      <div class="dtags"><span class="dtag">Singapore strategy</span><span class="dtag">AI literacy</span><span class="dtag">Domain + AI</span></div>
-      <div class="optban">
-        <div>⚡</div>
-        <p><strong>This module is optional.</strong> Include it for senior or policy-focused audiences. Use the button above to skip.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ░░░ S21: SINGAPORE ░░░ -->
-<div class="slide" data-index="29" data-m="6">
-  <div class="top-bar"><div class="sc" id="sc29"></div><div class="mb" style="background:var(--m6)">Module 6</div></div>
-  <div class="body">
-    <div class="hd"><span class="lbl">Singapore context</span></div>
-    <h2>How Singapore is approaching AI</h2>
-    <p class="sub">A deliberate, top-down national strategy — building AI capability into every workforce, not just the tech sector.</p>
-
-    <div class="vis">
-      <div class="vis-in" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7);padding:12px">
-        <div class="sg-vis">
-          <div class="sg-row pop" data-d="100"><div class="ic">🇸🇬</div><div><h4>National AI Strategy 2.0</h4><p>Develop AI safely. Position Singapore as a globally trusted AI hub.</p></div></div>
-          <div class="sg-row pop" data-d="220"><div class="ic">📚</div><div><h4>SkillsFuture &amp; SSG</h4><p>Building AI literacy across the entire workforce — not just tech roles.</p></div></div>
-          <div class="sg-row pop" data-d="340"><div class="ic">🏦</div><div><h4>Budget 2026 — National AI Missions</h4><p>Finance, healthcare, manufacturing, logistics — four sector priorities.</p></div></div>
-          <div class="sg-row pop" data-d="460"><div class="ic">🎓</div><div><h4>NTU AI literacy mandate</h4><p>Every undergraduate must complete an AI module — embedded as a baseline.</p></div></div>
-        </div>
-      </div>
-      <div class="vis-cap">A clear national signal — AI literacy is now a baseline expectation</div>
-    </div>
-
-    <div class="analogy">
-      <div class="em">🏗️</div>
-      <div>
-        <div class="ah">Analogy</div>
-        <p>Like <strong>Singapore building an MRT system before private cars filled the streets</strong>. The infrastructure is being laid down ahead of need. Those who learn to use it early move faster than those who wait.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ░░░ S22: AI LITERACY ░░░ -->
-<div class="slide" data-index="30" data-m="6">
-  <div class="top-bar"><div class="sc" id="sc30"></div><div class="mb" style="background:var(--m6)">Module 6</div></div>
-  <div class="body">
-    <div class="hd"><span class="lbl">What AI literacy means</span></div>
-    <h2>Five levels of being AI-literate</h2>
-    <p class="sub">You don't need to be a data scientist. You need to be a <strong>thoughtful user</strong>.</p>
-
-    <div class="vis">
-      <div class="vis-in" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7);padding:12px">
-        <div class="lit-vis">
-          <div class="lit-step fade-up" data-d="100"><div class="lit-n">1</div><div class="lit-text">Understand what AI is</div><div class="lit-bar"><div style="width:20%"></div></div></div>
-          <div class="lit-step fade-up" data-d="240"><div class="lit-n">2</div><div class="lit-text">Use it for real tasks</div><div class="lit-bar"><div style="width:40%"></div></div></div>
-          <div class="lit-step fade-up" data-d="380"><div class="lit-n">3</div><div class="lit-text">Spot when it's wrong</div><div class="lit-bar"><div style="width:60%"></div></div></div>
-          <div class="lit-step fade-up" data-d="520"><div class="lit-n">4</div><div class="lit-text">Apply governance principles</div><div class="lit-bar"><div style="width:80%"></div></div></div>
-          <div class="lit-step fade-up" data-d="660"><div class="lit-n">5</div><div class="lit-text">Translate AI for others</div><div class="lit-bar"><div style="width:100%"></div></div></div>
-        </div>
-      </div>
-      <div class="vis-cap">Each step builds on the last — start where you are</div>
-    </div>
-
-    <div class="analogy">
-      <div class="em">🚴</div>
-      <div>
-        <div class="ah">Analogy</div>
-        <p>Like <strong>learning to cycle</strong>. First you balance. Then you pedal. Then you steer. Then you avoid traffic. Then you teach someone else. <strong>The fifth level — teaching others — is where the rare talent sits.</strong></p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ░░░ S23: BRIDGE ░░░ -->
-<div class="slide" data-index="31" data-m="6">
-  <div class="top-bar"><div class="sc" id="sc31"></div><div class="mb" style="background:var(--m6)">Module 6</div></div>
-  <div class="body">
-    <div class="hd"><span class="lbl">The opportunity</span></div>
-    <h2>Domain expertise + AI capability</h2>
-    <p class="sub">The most valuable professional in this era is not the AI expert. It's <strong>the domain expert who knows how to use AI</strong>.</p>
-
-    <div class="vis">
-      <div class="vis-in" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7);padding:14px">
-        <div class="bridge-vis">
-          <div class="br-side fly-in" data-d="100">
-            <div class="br-icon">🏦</div>
-            <div class="br-name">Domain Expertise</div>
-            <div class="br-sub">Industry knowledge<br>Stakeholder dynamics<br>Real-world judgment</div>
-          </div>
-          <div class="br-plus pop" data-d="500">+</div>
-          <div class="br-side fly-in-r" data-d="900">
-            <div class="br-icon">🤖</div>
-            <div class="br-name">AI Capability</div>
-            <div class="br-sub">Effective prompting<br>Critical evaluation<br>Building real tools</div>
-          </div>
-        </div>
-      </div>
-      <div class="vis-cap">Two halves — that together do what neither can alone</div>
-    </div>
-
-    <div class="analogy">
-      <div class="em">🏛️</div>
-      <div>
-        <div class="ah">Analogy</div>
-        <p>Like a <strong>doctor who can also use modern equipment</strong>. The equipment doesn't replace the doctor. But the doctor who knows how to use it sees what others miss — and treats more patients better. <strong>The same shift is happening in every profession.</strong></p>
-      </div>
-    </div>
-
-    <div class="impacts">
-      <div class="imp"><div class="imp-i">🎯</div><div><h4>Where the biggest opportunity sits</h4><p>The career advantage isn't in becoming an AI expert. It's in becoming the <strong>domain professional in your field who has clearly learned to use AI well</strong>.</p></div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ░░░ S24: CLOSING ░░░ -->
-<div class="slide" data-index="32" data-m="0">
-  <div class="top-bar"><div class="sc" id="sc32"></div></div>
-  <div class="close-w">
-    <div style="width:32px;height:1px;background:var(--rule);margin:0 auto 28px;position:relative"></div>
-    <div class="close-q">"The question isn't whether AI will change your work. It already has. The question is whether you will be someone who shapes that change — or someone it simply happens to."</div>
-    <div class="close-name">Alvin Nambiar</div>
-    <div class="close-role">L&D Professional · Financial Services · AI Practitioner</div>
-    <div class="close-chips">
-      <span class="close-chip">🔨 FORGE — AI Programme Builder</span>
-      <span class="close-chip">📘 Generative AI for Working Professionals</span>
-    </div>
-  </div>
-</div>
-
 </div><!-- /deck -->
 
 <!-- NAV -->
@@ -1727,7 +1696,7 @@ const pf=document.getElementById('pf');
 const prevBtn=document.getElementById('prevBtn');
 const nextBtn=document.getElementById('nextBtn');
 const dots=document.getElementById('dots');
-const modCols=['#374151','#1D4ED8','#1D4ED8','#1D4ED8','#1D4ED8','#1D4ED8','#1D4ED8','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#C2410C','#C2410C','#C2410C','#C2410C','#0D7461','#0D7461','#0D7461','#0D7461','#0D7461','#4F46E5','#4F46E5','#4F46E5','#B45309','#B45309','#B45309','#B45309','#374151'];
+const modCols=['#374151','#1D4ED8','#1D4ED8','#1D4ED8','#1D4ED8','#1D4ED8','#1D4ED8','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#C2410C','#C2410C','#C2410C','#C2410C','#0D7461','#0D7461','#0D7461','#0D7461','#0D7461','#B45309','#B45309','#B45309','#B45309','#374151','#4F46E5','#4F46E5','#4F46E5'];
 
 for(let i=0;i<TOTAL;i++){
   const d=document.createElement('button');
