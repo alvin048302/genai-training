@@ -606,7 +606,7 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
         <div class="terms-vis">
           <div class="tcard pop" data-d="100"><div class="tcard-k">LLM</div><div class="tcard-v">Large Language Model — the brain behind tools like ChatGPT and Claude.</div></div>
           <div class="tcard pop" data-d="220"><div class="tcard-k">Prompt</div><div class="tcard-v">What you type in. Better question = better answer.</div></div>
-          <div class="tcard pop" data-d="340"><div class="tcard-k">Token</div><div class="tcard-v">A chunk of text the AI reads — about ¾ of a word.</div></div>
+          <div class="tcard pop" data-d="340"><div class="tcard-k">Token</div><div class="tcard-v">A chunk of text the AI reads — about ¾ of a word. AI services charge per token, and each conversation has a token limit, so longer prompts cost more and can get cut off.</div></div>
           <div class="tcard pop" data-d="460"><div class="tcard-k">Hallucination</div><div class="tcard-v">When AI sounds confident but is making things up.</div></div>
           <div class="tcard pop" data-d="580" style="grid-column:span 2"><div class="tcard-k">Training Cutoff</div><div class="tcard-v">The date after which the AI doesn't know what's happened — like a friend who's been on a remote island.</div></div>
         </div>
@@ -640,7 +640,7 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
       <div class="act-step-row">
         <div class="act-sn active" id="m1-sn">1</div>
         <div class="act-step-content">
-          <div class="act-step-q"><strong>Pre-filled:</strong> "Explain how Wi-Fi works in 3 sentences."</div>
+          <div class="act-step-q"><strong>Pre-filled:</strong> "Describe a perfect Sunday morning in 3 sentences."</div>
           <button class="act-step-btn" id="m1-btn" onclick="runM1Quick()"><span>Ask AI twice simultaneously</span><span>→</span></button>
         </div>
       </div>
@@ -720,7 +720,7 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
             <div class="power-icon">⚡</div>
             <div class="power-name">Speed</div>
             <div class="power-bar"><div class="grow-w" style="background:var(--m1);--w:95%" data-d="400"></div></div>
-            <div class="power-sub">Hours → minutes</div>
+            <div class="power-sub">Hours → seconds</div>
           </div>
           <div class="power pop" data-d="250" style="border-top:2px solid var(--m2)">
             <div class="power-icon">🎯</div>
@@ -740,10 +740,12 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
     </div>
 
     <div class="analogy">
-      <div class="em">🧰</div>
+      <div class="em">💡</div>
       <div>
-        <div class="ah">Analogy</div>
-        <p>Like having <strong>three new tools in your toolbox</strong>: a faster typist, a translator who speaks every audience, and a researcher who has already read everything. Same brain (yours). Better tools.</p>
+        <div class="ah">Three Analogies</div>
+        <p><strong>⚡ Speed:</strong> Like a microwave for words. What used to need an oven and an hour, now ready in 30 seconds.</p>
+        <p style="margin-top:8px"><strong>🎯 Personalisation:</strong> Like a tailor who can make 1,000 different suits at once, each fitted perfectly to a different person.</p>
+        <p style="margin-top:8px"><strong>🔗 Synthesis:</strong> Like the briefing you wish your team had time to prepare — research summarised, conclusions drawn, action items already extracted.</p>
       </div>
     </div>
 
@@ -776,10 +778,10 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
     </div>
 
     <div class="analogy">
-      <div class="em">🔧</div>
+      <div class="em">🧮</div>
       <div>
         <div class="ah">Analogy</div>
-        <p>Think of Gen AI as a <strong>Swiss Army knife for thinking work</strong>. One tool. Many uses. Pick the use that solves your most boring task first — that's where the relief is biggest.</p>
+        <p>Like the <strong>first time someone gave you a calculator</strong>. One tool. But it changed how you handle every number-related task forever. Gen AI is the same kind of shift — one tool that quietly upgrades how you do many different jobs.</p>
       </div>
     </div>
   </div>
@@ -1202,10 +1204,10 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
     </div>
 
     <div class="analogy">
-      <div class="em">🚗</div>
+      <div class="em">📖</div>
       <div>
         <div class="ah">Analogy</div>
-        <p>Like <strong>knowing the limits of your car</strong>. You don't refuse to drive because cars can crash — you learn the limits, drive carefully, and the car becomes incredibly useful. Same with AI.</p>
+        <p>Like a <strong>brilliant encyclopaedia from a few years ago</strong>. Most of what's inside is still true. Some of it is out of date. Some of it reflects the perspective of who wrote it. You wouldn't copy and paste from it without thinking — you'd use it as a starting point, and verify what matters.</p>
       </div>
     </div>
   </div>
@@ -1388,10 +1390,10 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
     </div>
 
     <div class="analogy">
-      <div class="em">🚦</div>
+      <div class="em">✈️</div>
       <div>
         <div class="ah">Analogy</div>
-        <p>Like <strong>traffic rules in a busy city</strong>. Boring on their own. But without them, everything crashes. ISO 5338 is the traffic system for AI — keeps everyone moving safely in the same direction.</p>
+        <p>Like the <strong>pre-flight safety checklist pilots run through every single takeoff</strong>. Boring. Repetitive. Essential. It's the reason flying is the safest form of travel — not the absence of risk, but the presence of disciplined process. AI governance works the same way.</p>
       </div>
     </div>
   </div>
@@ -1516,10 +1518,10 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
     </div>
 
     <div class="analogy">
-      <div class="em">🚴</div>
+      <div class="em">🗣️</div>
       <div>
         <div class="ah">Analogy</div>
-        <p>Like <strong>learning to cycle</strong>. First you balance. Then you pedal. Then you steer. Then you avoid traffic. Then you teach someone else. <strong>The fifth level — teaching others — is where the rare talent sits.</strong></p>
+        <p>Like <strong>learning a new language</strong>. First you listen. Then you speak basics. Then you understand the subtleties. Then you handle business conversations. Then you translate fluently for others. <strong>Most people stop at level 2 or 3. The translators — those who can explain it to others — are rare and valuable.</strong></p>
       </div>
     </div>
   </div>
@@ -1574,9 +1576,6 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
     <div class="close-q">"The question isn't whether AI will change your work. It already has. The question is whether you will be someone who shapes that change — or someone it simply happens to."</div>
     <div class="close-name">Alvin Nambiar</div>
     <div class="close-role">L&D Professional · Financial Services · AI Practitioner</div>
-    <div class="close-chips">
-      <span class="close-chip">📘 Generative AI for Working Professionals</span>
-    </div>
     <button class="close-cta" onclick="go(30)">
       <span class="cta-icon">📘</span>
       <span>Read the FORGE case study</span>
@@ -1820,7 +1819,7 @@ async function runM1Quick(){
   document.getElementById('m1-r1').innerHTML = actLoading();
   document.getElementById('m1-r2').innerHTML = actLoading();
   try {
-    const data = await callWorker('/api/m1-generation', {prompt: 'Explain how Wi-Fi works in 3 sentences.'});
+    const data = await callWorker('/api/m1-generation', {prompt: 'Describe a perfect Sunday morning in 3 sentences.'});
     document.getElementById('m1-r1').textContent = data.response1;
     document.getElementById('m1-r2').textContent = data.response2;
     const sn = document.getElementById('m1-sn');
