@@ -1,0 +1,2017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generative AI for Working Professionals</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0D1B2A;--ink2:#3D5166;--ink3:#7A8FA6;
+  --rule:#E4E9EF;--off:#F8F9FB;--white:#fff;
+  --m1:#1D4ED8;--m1l:#DBEAFE;--m1bg:#EEF4FF;
+  --m2:#0891B2;--m2l:#CFFAFE;--m2bg:#F0FDFE;
+  --m3:#C2410C;--m3l:#FED7AA;--m3bg:#FFF7ED;
+  --m4:#0D7461;--m4l:#BBF7D0;--m4bg:#F0FDF4;
+  --m5:#4F46E5;--m5l:#E0E7FF;--m5bg:#EEF2FF;
+  --m6:#B45309;--m6l:#FDE68A;--m6bg:#FFFBEB;
+}
+html,body{font-family:'Outfit',sans-serif;background:#E8EDF4;min-height:100vh;overflow-x:hidden}
+.deck{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 0 80px}
+.slide{display:none;width:100%;max-width:680px;min-height:100vh;flex-direction:column;background:white;box-shadow:0 0 30px rgba(0,0,0,.06)}
+.slide.active{display:flex}
+.prog-bar{height:3px;background:var(--rule);width:100%;max-width:680px;flex-shrink:0;position:sticky;top:0;z-index:50}
+.prog-fill{height:100%;transition:width .4s ease;background:var(--m1)}
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 26px 0}
+.sc{font-size:10px;font-weight:600;letter-spacing:.1em;color:var(--ink3)}
+.mb{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:12px;color:white}
+.optskip{font-size:10px;font-weight:600;color:var(--m6);background:var(--m6l);border:1px solid #FDE68A;border-radius:12px;padding:3px 10px;cursor:pointer;letter-spacing:.04em;transition:all .2s}
+.optskip:hover{background:#FCD34D}
+.body{flex:1;display:flex;flex-direction:column;padding:24px 26px 28px}
+.hd{display:flex;align-items:center;gap:9px;margin-bottom:14px}
+.hd::after{content:'';flex:1;height:1px;background:var(--rule)}
+.lbl{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent,var(--m1))}
+h2{font-family:'Fraunces',serif;font-size:clamp(1.3rem,4.5vw,1.75rem);font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:6px}
+.sub{font-size:12.5px;color:var(--ink2);line-height:1.7;margin-bottom:16px}
+[data-m="1"]{--accent:var(--m1)}
+[data-m="2"]{--accent:var(--m2)}
+[data-m="3"]{--accent:var(--m3)}
+[data-m="4"]{--accent:var(--m4)}
+[data-m="5"]{--accent:var(--m5)}
+[data-m="6"]{--accent:var(--m6)}
+
+/* ─── VISUAL BOX ─── */
+.vis{margin-bottom:14px;border-radius:12px;overflow:hidden;border:1px solid var(--rule)}
+.vis-in{padding:18px 14px;min-height:140px;display:flex;align-items:center;justify-content:center;position:relative}
+.vis-cap{text-align:center;font-size:10px;color:var(--ink3);font-style:italic;padding:7px 10px;border-top:1px solid var(--rule);background:var(--off)}
+
+/* ─── ANALOGY ─── */
+.analogy{padding:14px 16px;border-radius:9px;border-left:3px solid var(--accent);background:var(--off);display:flex;gap:10px;margin-bottom:14px}
+.analogy .em{font-size:1.3rem;flex-shrink:0;line-height:1.1}
+.ah{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;color:var(--accent)}
+.analogy p{font-size:12px;line-height:1.65;color:var(--ink2)}
+.analogy strong{color:var(--ink)}
+
+/* ─── IMPACTS ─── */
+.impacts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.imp{display:flex;align-items:flex-start;gap:10px;padding:11px 13px;border-radius:8px;border:1px solid var(--rule);background:var(--off)}
+.imp-i{font-size:1.1rem;flex-shrink:0;margin-top:1px}
+.imp h4{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.imp p{font-size:11.5px;line-height:1.55;color:var(--ink2)}
+
+/* ─── ANIMATION HELPERS ─── */
+.fly-in{opacity:0;transform:translateX(-15px);transition:all .5s ease}
+.fly-in.on{opacity:1;transform:translateX(0)}
+.fly-in-r{opacity:0;transform:translateX(15px);transition:all .5s ease}
+.fly-in-r.on{opacity:1;transform:translateX(0)}
+.fade-up{opacity:0;transform:translateY(12px);transition:all .5s ease}
+.fade-up.on{opacity:1;transform:translateY(0)}
+.pop{opacity:0;transform:scale(.85);transition:all .45s ease}
+.pop.on{opacity:1;transform:scale(1)}
+.grow-w{width:0;transition:width 1s ease}
+.grow-w.on{width:var(--w,100%)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.06);opacity:.85}}
+@keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes wave{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes scan{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+/* ─── AI ENGINE STYLES ─── */
+.ai-pill{padding:7px 14px;border-radius:10px;display:flex;align-items:center;gap:7px;background:var(--accent);color:white;font-size:10px;font-weight:700;letter-spacing:.08em;position:relative;overflow:hidden}
+.ai-pill .bdot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.85);animation:blink 1.2s ease-in-out infinite}
+.ai-pill .bdot:nth-child(2){animation-delay:.3s}
+.ai-pill .bdot:nth-child(3){animation-delay:.6s}
+.ai-pill-lg{width:60px;height:60px;border-radius:14px;background:var(--accent);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;color:white}
+.ai-pill-lg::before{content:'';position:absolute;inset:0;background:conic-gradient(from 0deg,rgba(255,255,255,.3),transparent,rgba(255,255,255,.3));animation:spin 2.4s linear infinite}
+.ai-pill-lg .em{font-size:1.2rem;position:relative;z-index:1}
+.ai-pill-lg .tx{font-size:7px;font-weight:700;letter-spacing:.08em;position:relative;z-index:1;margin-top:1px}
+
+/* ─── COVER ─── */
+.cover-grid{flex:1;display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 60px)}
+.cover-l{padding:36px 28px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--rule)}
+.cover-r{padding:36px 28px;background:var(--off);display:flex;flex-direction:column;justify-content:flex-end}
+.ctag{display:inline-flex;align-items:center;gap:6px;background:var(--m1l);border-radius:18px;padding:4px 12px;width:fit-content;margin-bottom:18px}
+.ctag span{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--m1)}
+.ch{font-family:'Fraunces',serif;font-size:clamp(1.9rem,6vw,2.7rem);font-weight:400;line-height:1.1;color:var(--ink);margin-bottom:12px}
+.ch em{font-style:italic;color:var(--m1)}
+.csub{font-size:12px;line-height:1.7;color:var(--ink2)}
+.cname{font-size:12px;color:var(--ink2);margin-top:auto}.cname strong{color:var(--ink)}
+.modlist{display:flex;flex-direction:column;gap:8px}
+.modi{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:7px;border:1px solid var(--rule);background:white}
+.modi-d{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.modi-n{font-size:10px;font-weight:700;color:var(--ink3)}
+.modi-t{font-size:11.5px;font-weight:500;color:var(--ink2)}
+.modi-o{font-size:8.5px;font-weight:700;color:var(--m6);background:var(--m6l);border-radius:8px;padding:1px 6px;margin-left:auto}
+
+/* ─── MODULE DIVIDER ─── */
+.div-grid{flex:1;display:grid;grid-template-columns:140px 1fr;border-top:4px solid var(--accent);min-height:calc(100vh - 60px)}
+.div-l{padding:36px 24px;background:var(--off);border-right:1px solid var(--rule);display:flex;flex-direction:column;justify-content:space-between}
+.div-num{font-family:'Fraunces',serif;font-size:clamp(2.8rem,8vw,4.5rem);font-weight:300;font-style:italic;color:var(--rule);line-height:1}
+.div-idx{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.div-r{padding:36px 28px;display:flex;flex-direction:column;justify-content:center}
+.div-t{font-family:'Fraunces',serif;font-size:clamp(1.7rem,5vw,2.4rem);font-weight:400;color:var(--ink);line-height:1.15;margin-bottom:12px}
+.div-d{font-size:12.5px;line-height:1.75;color:var(--ink2);margin-bottom:14px}
+.dtags{display:flex;flex-wrap:wrap;gap:5px}
+.dtag{font-size:10px;padding:3px 9px;border-radius:4px;background:var(--off);border:1px solid var(--rule);color:var(--ink2)}
+.optban{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;background:var(--m6bg);border:1px solid var(--m6l);border-radius:8px;margin-top:14px}
+.optban p{font-size:11px;color:#92400E;line-height:1.55}
+.optban strong{color:#78350F}
+
+/* ─── M1 SLIDE 2: WHAT IS — input/AI/output flow ─── */
+.flow-iao{display:flex;align-items:center;gap:8px;width:100%;justify-content:center}
+.flow-side{display:flex;flex-direction:column;gap:5px;align-items:center;flex:1;max-width:160px}
+.flow-lbl{font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);margin-bottom:3px}
+.chip{padding:4px 9px;border-radius:14px;font-size:9.5px;font-weight:600;background:white;border:1px solid;display:flex;align-items:center;gap:5px}
+.flow-mid{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:3px}
+.arrow-c{font-size:14px;color:var(--accent)}
+
+/* output card */
+.ocard{background:white;border:1px solid var(--rule);border-radius:8px;padding:9px 11px;display:flex;flex-direction:column;gap:5px;min-width:130px}
+.orow{display:flex;align-items:center;gap:6px}
+.orow .od{width:6px;height:6px;border-radius:50%;flex-shrink:0;background:var(--accent)}
+.orow .ot{font-size:9.5px;font-weight:500;color:var(--ink)}
+
+/* ─── M1 SLIDE 3: 3-STAGE FLOW ─── */
+.stages-vis{display:flex;flex-direction:column;gap:10px;width:100%}
+.stg{display:flex;align-items:center;gap:10px;padding:10px 12px;background:white;border:1px solid var(--rule);border-radius:9px}
+.stg-n{width:24px;height:24px;border-radius:50%;background:var(--accent);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.stg-icon{font-size:1.3rem}
+.stg-lbl{font-size:11px;font-weight:600;color:var(--ink)}
+.stg-arrow{display:flex;justify-content:center;color:var(--accent);font-size:12px;margin:-4px 0}
+
+/* ─── M1 SLIDE 4: TRADITIONAL VS GEN ─── */
+.compare-vis{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+.cmp-side{padding:14px 12px;border-radius:8px;background:white;border:1px solid var(--rule);display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center}
+.cmp-icon{font-size:1.6rem}
+.cmp-title{font-size:11px;font-weight:700;letter-spacing:.04em}
+.cmp-flow{display:flex;flex-direction:column;gap:5px;width:100%}
+.cmp-step{font-size:9.5px;padding:4px 7px;border-radius:5px;background:var(--off);border:1px solid var(--rule);color:var(--ink2)}
+.cmp-step.rigid{font-family:'Courier New',monospace}
+
+/* ─── M1 SLIDE 5: TERMS GLOSSARY ANIM ─── */
+.terms-vis{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+.tcard{background:white;border:1px solid var(--rule);border-radius:8px;padding:10px 12px}
+.tcard-k{font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.tcard-v{font-size:10.5px;line-height:1.5;color:var(--ink2)}
+
+/* ─── M2 SLIDE 7: 3 SUPERPOWERS ─── */
+.power-vis{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;width:100%}
+.power{padding:12px 10px;border-radius:9px;background:white;border:1px solid var(--rule);display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.power-icon{font-size:1.7rem}
+.power-name{font-size:10.5px;font-weight:700;color:var(--ink)}
+.power-bar{height:5px;width:100%;background:var(--off);border-radius:3px;overflow:hidden}
+.power-bar div{height:100%;border-radius:3px}
+.power-sub{font-size:9.5px;color:var(--ink3)}
+
+/* ─── M2 SLIDE 8: APPLICATIONS RADIATING ─── */
+.apps-vis{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;width:100%}
+.app-c{padding:10px 8px;border-radius:8px;background:white;border:1px solid var(--rule);display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.app-c .ic{font-size:1.3rem}
+.app-c .nm{font-size:10px;font-weight:600;color:var(--ink)}
+.app-c .eg{font-size:8.5px;color:var(--ink3);font-style:italic;line-height:1.3}
+
+/* ─── M2 SLIDE 9: BUSINESS QUADRANTS ─── */
+.biz-vis{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+.biz-q{padding:11px;border-radius:8px;background:white;border:1px solid var(--rule)}
+.biz-q h4{font-size:11px;font-weight:600;color:var(--ink);margin-bottom:5px;display:flex;align-items:center;gap:5px}
+.biz-q ul{list-style:none;display:flex;flex-direction:column;gap:3px}
+.biz-q li{font-size:10px;color:var(--ink2);padding-left:8px;position:relative;line-height:1.4}
+.biz-q li::before{content:'';position:absolute;left:0;top:.5em;width:3px;height:3px;border-radius:50%;background:var(--accent)}
+
+/* ─── M3 SLIDE 11: HALLUCINATION ─── */
+.hal-vis{display:flex;flex-direction:column;gap:8px;width:100%}
+.qa-row{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;background:white;border-radius:9px;border:1px solid var(--rule)}
+.qa-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;color:white;font-weight:700}
+.qa-av.usr{background:var(--ink2)}
+.qa-av.ai{background:var(--m3)}
+.qa-bub{flex:1}
+.qa-name{font-size:9px;font-weight:700;color:var(--ink3);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}
+.qa-msg{font-size:11px;color:var(--ink);line-height:1.5}
+.verify-tag{margin-top:6px;display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:5px;font-size:9px;font-weight:700;letter-spacing:.04em;background:#FEE2E2;color:#B91C1C}
+
+/* ─── M3 SLIDE 12: 4 RISKS GRID ─── */
+.risk-vis{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+.risk-c{padding:11px;border-radius:8px;background:var(--m3bg);border:1px solid var(--m3l);border-left:3px solid var(--m3)}
+.risk-c h4{font-size:10.5px;font-weight:700;color:#7C2D12;margin-bottom:3px;display:flex;align-items:center;gap:5px}
+.risk-c p{font-size:10px;color:#9A3412;line-height:1.45}
+.risk-c .eg{font-size:9.5px;color:#9A3412;font-style:italic;margin-top:4px;padding-top:4px;border-top:1px solid var(--m3l)}
+
+/* ─── M4 SLIDE 14: HUMAN IN LOOP ─── */
+.loop-vis{display:flex;flex-direction:column;gap:8px;align-items:center;width:100%}
+.loop-row{display:flex;align-items:center;gap:8px;width:100%}
+.loop-step{flex:1;padding:10px;background:white;border:1px solid var(--rule);border-radius:8px;text-align:center;display:flex;flex-direction:column;gap:4px;align-items:center}
+.loop-step .ic{font-size:1.4rem}
+.loop-step .nm{font-size:10px;font-weight:600;color:var(--ink)}
+.loop-step .ds{font-size:9px;color:var(--ink3);line-height:1.35}
+.loop-arr{font-size:14px;color:var(--accent);flex-shrink:0}
+.loop-back{margin-top:6px;display:flex;align-items:center;justify-content:center;gap:5px;padding:5px 10px;background:var(--m4bg);border:1px solid var(--m4l);border-radius:14px;font-size:9.5px;font-weight:600;color:var(--m4)}
+
+/* ─── M4 SLIDE 15: PROMPT QUALITY ─── */
+.prompt-vis{display:flex;flex-direction:column;gap:8px;width:100%}
+.pcompare{padding:12px;border-radius:8px;border:1px solid var(--rule)}
+.pcompare.bad{background:#FEF2F2;border-color:#FECACA}
+.pcompare.good{background:var(--m4bg);border-color:var(--m4l)}
+.pc-tag{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px}
+.bad .pc-tag{color:#B91C1C}
+.good .pc-tag{color:var(--m4)}
+.pc-pr{font-family:'Courier New',monospace;font-size:10.5px;color:var(--ink);line-height:1.5;padding:7px 9px;background:white;border-radius:5px;border:1px solid rgba(0,0,0,.05)}
+.pc-result{font-size:10px;color:var(--ink2);margin-top:6px;line-height:1.45}
+
+/* ─── M4 SLIDE 16: ISO 5338 ─── */
+.iso-vis{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;width:100%}
+.iso-c{padding:10px 8px;border-radius:8px;background:white;border:1px solid var(--rule);text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px}
+.iso-c .ic{font-size:1.3rem}
+.iso-c .nm{font-size:10px;font-weight:600;color:var(--ink)}
+
+/* ─── M5 FORGE ─── */
+.forge-vis{display:flex;align-items:center;gap:8px;width:100%}
+.forge-in,.forge-out{flex:1;padding:11px;border-radius:8px;background:white;border:1px solid var(--rule);display:flex;flex-direction:column;gap:5px}
+.forge-h{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:3px}
+.forge-line{font-size:10px;color:var(--ink);line-height:1.4;padding:4px 8px;background:var(--off);border-radius:5px}
+.forge-out .forge-line{display:flex;align-items:center;gap:6px}
+.forge-out .forge-line::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--m5);flex-shrink:0}
+
+/* ─── M5 SLIDE 19: prompt example ─── */
+.pbox{background:#0D1B2A;border-radius:7px;padding:11px 13px;font-family:'Courier New',monospace;font-size:10.5px;line-height:1.6;color:#7FBBDA;margin-bottom:10px}
+.three-pillars{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
+.three-pillars .pc{padding:11px;background:white;border:1px solid var(--rule);border-radius:8px;text-align:center;display:flex;flex-direction:column;gap:4px;align-items:center;border-top:2px solid var(--m5)}
+.three-pillars .ic{font-size:1.3rem}
+.three-pillars .nm{font-size:10.5px;font-weight:700;color:var(--ink)}
+.three-pillars .ds{font-size:9.5px;color:var(--ink3);line-height:1.4}
+
+/* ─── M6 SG ─── */
+.sg-vis{display:flex;flex-direction:column;gap:7px;width:100%}
+.sg-row{display:flex;align-items:center;gap:9px;padding:9px 11px;background:white;border:1px solid var(--rule);border-radius:8px}
+.sg-row .ic{font-size:1.15rem;flex-shrink:0}
+.sg-row h4{font-size:10.5px;font-weight:600;color:var(--ink);margin-bottom:1px}
+.sg-row p{font-size:9.5px;color:var(--ink2);line-height:1.4}
+
+/* ─── M6 LITERACY ladder ─── */
+.lit-vis{display:flex;flex-direction:column;gap:5px;width:100%}
+.lit-step{display:flex;align-items:center;gap:9px;padding:8px 11px;background:white;border:1px solid var(--rule);border-radius:7px;border-left:3px solid var(--m6)}
+.lit-n{width:20px;height:20px;border-radius:50%;background:var(--m6);color:white;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.lit-text{font-size:10.5px;color:var(--ink);font-weight:500}
+.lit-bar{flex-shrink:0;height:4px;border-radius:2px;background:var(--off);width:40px}
+.lit-bar div{height:100%;border-radius:2px;background:var(--m6)}
+
+/* ─── M6 BRIDGE ─── */
+.bridge-vis{display:flex;align-items:center;gap:8px;width:100%}
+.br-side{flex:1;padding:13px 10px;border-radius:9px;background:white;border:1px solid var(--rule);display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center}
+.br-icon{font-size:1.7rem}
+.br-name{font-size:10.5px;font-weight:700;color:var(--ink)}
+.br-sub{font-size:9.5px;color:var(--ink3);line-height:1.4}
+.br-plus{font-size:1.2rem;color:var(--m6);font-weight:700}
+
+/* ─── CLOSING ─── */
+.close-w{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 28px;position:relative}
+.close-w::before{content:'';position:absolute;top:0;left:50%;width:1px;height:100%;background:var(--rule)}
+.close-q{font-family:'Fraunces',serif;font-size:clamp(1.1rem,3.5vw,1.55rem);font-weight:300;font-style:italic;color:var(--ink);line-height:1.55;max-width:520px;margin:0 auto 22px;position:relative}
+.close-name{font-size:13px;font-weight:600;color:var(--ink);position:relative}
+.close-role{font-size:11px;color:var(--ink3);margin-top:3px;position:relative}
+.close-chips{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-top:18px;position:relative}
+.close-chip{font-size:10px;padding:4px 11px;border-radius:5px;background:var(--off);border:1px solid var(--rule);color:var(--ink2)}
+
+/* ─── NAV ─── */
+.nav{position:fixed;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:10px;padding:9px 18px 12px;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-top:1px solid var(--rule);z-index:100}
+.nav-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--rule);background:white;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink2);transition:all .2s}
+.nav-btn:hover:not(:disabled){background:var(--ink);color:white;border-color:var(--ink)}
+.nav-btn:disabled{opacity:.25;cursor:not-allowed}
+.nav-dots{display:flex;gap:4px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:300px}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--rule);cursor:pointer;border:none;padding:0;transition:all .25s;flex-shrink:0}
+.dot.on{width:14px;border-radius:3px;background:var(--ink2)}
+
+@media(max-width:520px){
+  .cover-grid{grid-template-columns:1fr}.cover-r{display:none}
+  .div-grid{grid-template-columns:1fr}.div-l{display:none}
+  .compare-vis,.terms-vis,.power-vis,.biz-vis,.risk-vis,.three-pillars,.bridge-vis,.forge-vis{grid-template-columns:1fr;display:flex;flex-direction:column}
+  .apps-vis,.iso-vis{grid-template-columns:1fr 1fr}
+  .body{padding:20px 18px 22px}
+}
+
+/* ═══════════════════════════════════════════
+   ACTIVITY SLIDES STYLES
+   ═══════════════════════════════════════════ */
+.act-color{--act:#7C3AED;--actl:#EDE9FE}
+.act-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.act-time{display:inline-flex;align-items:center;gap:4px;background:var(--actl);border-radius:12px;padding:3px 10px;font-size:10px;font-weight:600;color:var(--act)}
+.act-num{font-size:10px;color:var(--ink3);font-weight:600;margin-bottom:4px;letter-spacing:.06em}
+.act-lbl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--act)}
+
+/* Quick start box */
+.qs-box{background:var(--off);border:1px solid var(--rule);border-radius:10px;padding:14px;margin-bottom:12px}
+.qs-h{display:flex;align-items:center;gap:7px;margin-bottom:10px;flex-wrap:wrap}
+.qs-h-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--act)}
+.qs-desc{font-size:10.5px;color:var(--ink3)}
+
+/* Steps */
+.act-step-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:9px}
+.act-step-row:last-child{margin-bottom:0}
+.act-sn{width:26px;height:26px;border-radius:50%;background:var(--ink3);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s}
+.act-sn.active{background:var(--act)}
+.act-sn.done{background:#10B981}
+.act-step-content{flex:1;min-width:0}
+.act-step-q{font-size:11px;color:var(--ink2);line-height:1.5;margin-bottom:5px}
+.act-step-q strong{color:var(--ink)}
+.act-step-btn{background:var(--act);color:white;border:none;border-radius:7px;padding:8px 13px;font-size:11.5px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .2s;font-family:'Outfit',sans-serif}
+.act-step-btn:hover:not(:disabled){background:#6D28D9;transform:translateY(-1px)}
+.act-step-btn:disabled{background:#CBD5E1;cursor:not-allowed}
+
+/* Response area */
+.act-response{margin-top:8px;padding:11px 13px;background:white;border:1px solid var(--rule);border-radius:8px;display:none}
+.act-response.visible{display:block;animation:actSlideIn .35s ease both}
+@keyframes actSlideIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+.act-r-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.act-r-prov{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px}
+.act-r-text{font-size:11.5px;line-height:1.62;color:var(--ink);white-space:pre-wrap;word-wrap:break-word}
+
+/* Loading dots */
+.act-loading{display:flex;align-items:center;gap:5px;padding:6px 0}
+.act-ld{width:6px;height:6px;border-radius:50%;background:var(--ink3);animation:actBounce 1.2s ease-in-out infinite}
+.act-ld:nth-child(2){animation-delay:.15s}
+.act-ld:nth-child(3){animation-delay:.3s}
+.act-ld-lbl{font-size:11px;color:var(--ink3);margin-left:5px}
+@keyframes actBounce{0%,80%,100%{transform:scale(.6);opacity:.4}40%{transform:scale(1);opacity:1}}
+.act-r-err{padding:8px 10px;background:#FEF2F2;border:1px solid #FECACA;border-radius:6px;font-size:11px;color:#B91C1C;margin-top:5px}
+
+/* Reveal banners */
+.act-reveal{padding:13px 15px;border-radius:9px;border-left:3px solid var(--act);background:var(--actl);display:none;margin-bottom:12px;gap:10px;align-items:flex-start}
+.act-reveal.visible{display:flex;animation:actSlideIn .5s ease both}
+.act-reveal-icon{font-size:1.3rem;flex-shrink:0}
+.act-reveal h4{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.act-reveal p{font-size:11.5px;line-height:1.65}
+
+/* Side-by-side layout */
+.act-sbs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.act-sbs-card{background:var(--off);border:1px solid var(--rule);border-radius:9px;padding:12px;display:flex;flex-direction:column;gap:6px}
+.act-sbs-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.act-sbs-body{font-size:11.5px;line-height:1.6;color:var(--ink);min-height:80px;flex:1}
+.act-sbs-loading{display:flex;align-items:center;gap:5px;min-height:80px}
+
+/* 3 columns */
+.act-col3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:12px}
+.act-col3-card{background:var(--off);border:1px solid var(--rule);border-radius:9px;padding:11px;display:flex;flex-direction:column;gap:6px}
+.act-col3-label{font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.act-col3-body{font-size:11px;line-height:1.58;color:var(--ink);min-height:80px;flex:1}
+.act-col3-bullet{display:flex;gap:5px;align-items:flex-start;font-size:11px;line-height:1.5;color:var(--ink2);margin-bottom:4px}
+.act-col3-bullet::before{content:'•';font-weight:700;flex-shrink:0;color:var(--act)}
+
+/* Try your own (collapsible) */
+.tryown{margin-bottom:12px}
+.tryown-toggle{width:100%;background:white;border:1px dashed var(--rule);border-radius:8px;padding:10px 14px;font-size:11.5px;font-weight:600;color:var(--ink2);cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:'Outfit',sans-serif;transition:all .2s}
+.tryown-toggle:hover{border-color:var(--act);color:var(--act)}
+.tryown-toggle .chev{transition:transform .25s}
+.tryown.open .tryown-toggle .chev{transform:rotate(180deg)}
+.tryown-content{display:none;padding:14px;background:var(--off);border:1px solid var(--rule);border-top:none;border-radius:0 0 8px 8px}
+.tryown.open .tryown-content{display:block;animation:actSlideIn .3s ease both}
+.tryown-content label{display:block;font-size:10.5px;font-weight:600;color:var(--ink2);margin-bottom:5px}
+.tryown-content textarea{width:100%;padding:9px 11px;border:1px solid var(--rule);border-radius:6px;font-family:'Outfit',sans-serif;font-size:12px;line-height:1.5;resize:vertical;min-height:60px;background:white}
+.tryown-content textarea:focus{outline:none;border-color:var(--act)}
+.tryown-hint{font-size:10px;color:var(--ink3);margin-top:4px;line-height:1.4;font-style:italic}
+.tryown-run{background:var(--act);color:white;border:none;border-radius:6px;padding:8px 14px;font-size:11.5px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;margin-top:9px}
+.tryown-run:hover{background:#6D28D9}
+.tryown-run:disabled{opacity:.5;cursor:not-allowed}
+
+/* Notice box */
+.act-notice{background:white;border:1px solid var(--rule);border-radius:8px;padding:11px 13px;margin-bottom:12px}
+.act-notice-h{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--act);margin-bottom:6px}
+.act-notice ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.act-notice li{font-size:11.5px;color:var(--ink2);display:flex;gap:7px;line-height:1.5;align-items:flex-start}
+.act-notice li::before{content:'✓';color:var(--act);font-weight:700;flex-shrink:0}
+
+/* Facilitator notes */
+.facil-toggle{background:transparent;border:1px dashed #FCD34D;color:#78350F;border-radius:6px;padding:6px 10px;font-size:10px;font-weight:600;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;font-family:'Outfit',sans-serif;margin-bottom:8px}
+.facil-toggle:hover{background:#FFFBEB}
+.facil{background:#FFFBEB;border:1px solid #FCD34D;border-radius:9px;padding:14px 16px;border-left:3px solid #B45309;display:none}
+.facil.visible{display:block;animation:actSlideIn .3s ease both}
+.facil-h{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#78350F;margin-bottom:9px}
+.facil-section{margin-bottom:10px}
+.facil-section:last-child{margin-bottom:0}
+.facil-st{font-size:10px;font-weight:700;color:#78350F;margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em}
+.facil ul{list-style:none;display:flex;flex-direction:column;gap:3px}
+.facil li{font-size:11px;color:#92400E;line-height:1.55;padding-left:11px;position:relative}
+.facil li::before{content:'›';position:absolute;left:0;color:#B45309;font-weight:700}
+.facil-q{font-style:italic;color:#92400E;font-size:11px;line-height:1.55;margin-top:3px}
+
+/* Prompt compare */
+.pc{padding:12px;border-radius:8px;border:1px solid var(--rule);margin-bottom:8px}
+.pc.bad{background:#FEF2F2;border-color:#FECACA}
+.pc.good{background:#F0FDF4;border-color:#BBF7D0}
+.pc-tag{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px}
+.bad .pc-tag{color:#B91C1C}.good .pc-tag{color:var(--m4)}
+.pc-prompt{font-family:'Courier New',monospace;font-size:10.5px;color:var(--ink);line-height:1.5;padding:7px 9px;background:white;border-radius:5px}
+
+/* M3 specific - red provider badge */
+.r-prov-m3{background:#FFF7ED;color:var(--m3)}
+.r-prov-m4{background:#F0FDF4;color:var(--m4)}
+
+@media(max-width:520px){
+  .act-sbs,.act-col3{grid-template-columns:1fr}
+}
+
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- ░░░ S0: COVER ░░░ -->
+<div class="slide active" data-index="0" data-m="0">
+  <div class="prog-bar"><div class="prog-fill" id="pf"></div></div>
+  <div class="top-bar"><div class="sc" id="sc0"></div></div>
+  <div class="cover-grid">
+    <div class="cover-l">
+      <div>
+        <div class="ctag"><span>Generative AI</span></div>
+        <div class="ch">Generative AI<br><em>for Working<br>Professionals</em></div>
+        <p class="csub">What it is. What it does. Where it helps. Where it fails. Explained for everyday people — no jargon required.</p>
+      </div>
+      <div class="cname"><strong>Alvin Nambiar</strong><br>L&D Professional · Financial Services · AI Practitioner</div>
+    </div>
+    <div class="cover-r">
+      <div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px">Six Modules</div>
+      <div class="modlist">
+        <div class="modi"><div class="modi-d" style="background:var(--m1)"></div><span class="modi-n">01</span><span class="modi-t">What Is Gen AI</span></div>
+        <div class="modi"><div class="modi-d" style="background:var(--m2)"></div><span class="modi-n">02</span><span class="modi-t">How Gen AI Helps</span></div>
+        <div class="modi"><div class="modi-d" style="background:var(--m3)"></div><span class="modi-n">03</span><span class="modi-t">Limitations &amp; Risks</span></div>
+        <div class="modi"><div class="modi-d" style="background:var(--m4)"></div><span class="modi-n">04</span><span class="modi-t">Safeguards &amp; Use</span></div>
+        <div class="modi"><div class="modi-d" style="background:var(--m5)"></div><span class="modi-n">05</span><span class="modi-t">FORGE Application</span></div>
+        <div class="modi"><div class="modi-d" style="background:var(--m6)"></div><span class="modi-n">06</span><span class="modi-t">The Way Forward</span><span class="modi-o">Optional</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S1: M1 DIVIDER ░░░ -->
+<div class="slide" data-index="1" data-m="1">
+  <div class="top-bar"><div class="sc" id="sc1"></div></div>
+  <div class="div-grid">
+    <div class="div-l"><div class="div-idx">Module 01</div><div class="div-num">01</div></div>
+    <div class="div-r">
+      <div class="div-t">What Is<br>Generative AI?</div>
+      <p class="div-d">A plain-English explanation of what Gen AI actually is, how it works, and why it's different from every kind of software that came before.</p>
+      <div class="dtags"><span class="dtag">Definition</span><span class="dtag">How it learns</span><span class="dtag">Traditional vs Gen AI</span><span class="dtag">Key terms</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S2: WHAT IS GEN AI — INPUT/AI/OUTPUT FLOW ░░░ -->
+<div class="slide" data-index="2" data-m="1">
+  <div class="top-bar"><div class="sc" id="sc2"></div><div class="mb" style="background:var(--m1)">Module 1</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">Definition</span></div>
+    <h2>What is Generative AI?</h2>
+    <p class="sub">Software that <strong>creates new content</strong> — by learning from millions of examples and then producing fresh output when you ask.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#F0F4FF,#EAF1FF)">
+        <div class="flow-iao">
+          <div class="flow-side">
+            <div class="flow-lbl">Reads</div>
+            <div class="chip fly-in" style="border-color:var(--m1l);color:var(--m1)" data-d="100">📚 Books</div>
+            <div class="chip fly-in" style="border-color:var(--m1l);color:var(--m1)" data-d="220">📰 News</div>
+            <div class="chip fly-in" style="border-color:var(--m1l);color:var(--m1)" data-d="340">💻 Code</div>
+            <div class="chip fly-in" style="border-color:var(--m1l);color:var(--m1)" data-d="460">📖 Articles</div>
+          </div>
+          <div class="flow-mid">
+            <div class="arrow-c fade-up" data-d="600">→</div>
+            <div class="ai-pill-lg pop" data-d="700"><div class="em">🤖</div><div class="tx">GEN AI</div></div>
+            <div class="arrow-c fade-up" data-d="900">→</div>
+          </div>
+          <div class="flow-side">
+            <div class="flow-lbl">Writes</div>
+            <div class="ocard fly-in-r" data-d="1000">
+              <div class="orow"><div class="od"></div><div class="ot">Your answer</div></div>
+              <div class="orow"><div class="od"></div><div class="ot">Your draft</div></div>
+              <div class="orow"><div class="od"></div><div class="ot">Your summary</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="vis-cap">Reads everything once → produces something new every time you ask</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">📚</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Imagine a friend who has read <strong>millions of books</strong>. When you ask them a question, they don't go look it up — they answer from memory. They might be helpful, brilliant, or sometimes wrong. <strong>That is Gen AI.</strong> It generates from what it has learned, not from a search.</p>
+      </div>
+    </div>
+
+    <div class="impacts">
+      <div class="imp"><div class="imp-i">✨</div><div><h4>It creates, doesn't retrieve</h4><p>Every answer is freshly composed. Two people asking the same question get two different responses.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S3: HOW IT WORKS — 3 STAGES ░░░ -->
+<div class="slide" data-index="3" data-m="1">
+  <div class="top-bar"><div class="sc" id="sc3"></div><div class="mb" style="background:var(--m1)">Module 1</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">How it works</span></div>
+    <h2>Three simple stages</h2>
+    <p class="sub">There's no magic. Three steps explain how it goes from raw text to a useful answer.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#F0F4FF,#EAF1FF);padding:14px;flex-direction:column;gap:6px">
+        <div class="stages-vis">
+          <div class="stg fade-up" data-d="100"><div class="stg-n">1</div><div class="stg-icon">📖</div><div><div class="stg-lbl">Train</div><div style="font-size:9px;color:var(--ink3)">Read everything (once)</div></div></div>
+          <div class="stg-arrow fade-up" data-d="350">↓</div>
+          <div class="stg fade-up" data-d="500"><div class="stg-n">2</div><div class="stg-icon">🧠</div><div><div class="stg-lbl">Learn patterns</div><div style="font-size:9px;color:var(--ink3)">How words and ideas connect</div></div></div>
+          <div class="stg-arrow fade-up" data-d="750">↓</div>
+          <div class="stg fade-up" data-d="900"><div class="stg-n">3</div><div class="stg-icon">✍️</div><div><div class="stg-lbl">Generate</div><div style="font-size:9px;color:var(--ink3)">Compose your answer in real time</div></div></div>
+        </div>
+      </div>
+      <div class="vis-cap">One long training. Then instant answers, forever after.</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🎓</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Like a student who <strong>spends years reading every book in the library</strong> — then graduates and answers your questions from memory. They never go back to the books. They draw on what they remember.</p>
+      </div>
+    </div>
+
+    <div class="impacts">
+      <div class="imp"><div class="imp-i">⏰</div><div><h4>Knowledge has a date</h4><p>The student "graduated" at some point — usually months or a year ago. They don't know what's happened since.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S4: TRADITIONAL VS GEN AI ░░░ -->
+<div class="slide" data-index="4" data-m="1">
+  <div class="top-bar"><div class="sc" id="sc4"></div><div class="mb" style="background:var(--m1)">Module 1</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">Comparison</span></div>
+    <h2>What makes Gen AI different?</h2>
+    <p class="sub">Old AI followed strict rules written by humans. New AI figured out the rules by itself.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#F0F4FF,#EAF1FF);padding:14px">
+        <div class="compare-vis">
+          <div class="cmp-side fade-up" data-d="100">
+            <div class="cmp-icon">🔧</div>
+            <div class="cmp-title" style="color:var(--ink2)">Traditional AI</div>
+            <div class="cmp-flow">
+              <div class="cmp-step rigid">if A → do X</div>
+              <div class="cmp-step rigid">if B → do Y</div>
+              <div class="cmp-step rigid">if C → do Z</div>
+            </div>
+            <div style="font-size:9px;color:var(--ink3);margin-top:3px">Rules written by humans</div>
+          </div>
+          <div class="cmp-side fade-up" data-d="500" style="border-color:var(--m1l);background:var(--m1bg)">
+            <div class="cmp-icon">✨</div>
+            <div class="cmp-title" style="color:var(--m1)">Generative AI</div>
+            <div class="cmp-flow">
+              <div class="cmp-step" style="background:white;border-color:var(--m1l);color:var(--m1)">Learns patterns</div>
+              <div class="cmp-step" style="background:white;border-color:var(--m1l);color:var(--m1)">Adapts to anything</div>
+              <div class="cmp-step" style="background:white;border-color:var(--m1l);color:var(--m1)">Creates new output</div>
+            </div>
+            <div style="font-size:9px;color:var(--m1);margin-top:3px">Rules learned from data</div>
+          </div>
+        </div>
+      </div>
+      <div class="vis-cap">From "follow my instructions" → to "figure it out yourself"</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🍳</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Traditional AI is a <strong>cookbook</strong> — strict recipes that work only for the dishes listed. Gen AI is a <strong>chef</strong> — has tasted thousands of dishes and can cook something new from whatever ingredients you give them. More flexible. More powerful. But — the chef can also get it wrong.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S5: KEY TERMS ░░░ -->
+<div class="slide" data-index="5" data-m="1">
+  <div class="top-bar"><div class="sc" id="sc5"></div><div class="mb" style="background:var(--m1)">Module 1</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">Glossary</span></div>
+    <h2>Five terms you'll hear everywhere</h2>
+    <p class="sub">Quick definitions — so the jargon doesn't slow you down.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#F0F4FF,#EAF1FF);padding:14px">
+        <div class="terms-vis">
+          <div class="tcard pop" data-d="100"><div class="tcard-k">LLM</div><div class="tcard-v">Large Language Model — the brain behind tools like ChatGPT and Claude.</div></div>
+          <div class="tcard pop" data-d="220"><div class="tcard-k">Prompt</div><div class="tcard-v">What you type in. Better question = better answer.</div></div>
+          <div class="tcard pop" data-d="340"><div class="tcard-k">Token</div><div class="tcard-v">A chunk of text the AI reads — about ¾ of a word.</div></div>
+          <div class="tcard pop" data-d="460"><div class="tcard-k">Hallucination</div><div class="tcard-v">When AI sounds confident but is making things up.</div></div>
+          <div class="tcard pop" data-d="580" style="grid-column:span 2"><div class="tcard-k">Training Cutoff</div><div class="tcard-v">The date after which the AI doesn't know what's happened — like a friend who's been on a remote island.</div></div>
+        </div>
+      </div>
+      <div class="vis-cap">You don't need all five fluently — just to know what they mean when they come up</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🗣️</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Like learning <strong>five basic phrases before travelling to a new country</strong> — you won't be fluent, but you'll understand what's going on around you. These five terms unlock 90% of any AI conversation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ M1 ACTIVITY: Generation, not Retrieval ░░░ -->
+<div class="slide act-color" data-index="6" data-m="1">
+  <div class="top-bar">
+    <div class="sc" id="sc6"></div>
+    <div class="act-time">⏱ 5 min</div>
+  </div>
+  <div class="body">
+    <div class="hd"><span class="lbl" style="color:var(--act)">🧪 Activity 1 of 4 — Module 1</span></div>
+    <h2 style="margin-bottom:6px">Generation, not Retrieval</h2>
+    <p class="sub">Ask AI the same question twice. The answers will be similar — but not identical. This proves AI <strong>generates fresh output every time</strong>, rather than retrieving a stored answer.</p>
+
+    <div class="qs-box">
+      <div class="qs-h"><span class="qs-h-tag">⚡ Quick Start</span><span class="qs-desc">— one click, watch both answers appear</span></div>
+      <div class="act-step-row">
+        <div class="act-sn active" id="m1-sn">1</div>
+        <div class="act-step-content">
+          <div class="act-step-q"><strong>Pre-filled:</strong> "Explain how Wi-Fi works in 3 sentences."</div>
+          <button class="act-step-btn" id="m1-btn" onclick="runM1Quick()"><span>Ask AI twice simultaneously</span><span>→</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="act-sbs" id="m1-sbs" style="display:none">
+      <div class="act-sbs-card">
+        <div class="act-sbs-label" style="color:var(--m1)">Answer #1</div>
+        <div class="act-sbs-body" id="m1-r1"></div>
+      </div>
+      <div class="act-sbs-card">
+        <div class="act-sbs-label" style="color:var(--m1)">Answer #2</div>
+        <div class="act-sbs-body" id="m1-r2"></div>
+      </div>
+    </div>
+
+    <div class="act-reveal" id="m1-reveal" style="border-left-color:var(--m1);background:var(--m1bg)">
+      <div class="act-reveal-icon">💡</div>
+      <div>
+        <h4 style="color:var(--m1)">Same question. Two different answers.</h4>
+        <p style="color:#1E3A5F">AI doesn't store answers — it composes them fresh every time. This is what "generative" means. Notice the different word choices, different examples, different sentence structures — same meaning, different expression.</p>
+      </div>
+    </div>
+
+    <div class="tryown" id="m1-tryown">
+      <button class="tryown-toggle" onclick="toggleOwn('m1-tryown')"><span>💭 Try your own question</span><span class="chev">▼</span></button>
+      <div class="tryown-content">
+        <label>Ask anything — you'll get two different answers:</label>
+        <textarea id="m1-custom" maxlength="300" placeholder="e.g., What is climate change? · How does a car engine work? · What is inflation?"></textarea>
+        <div class="tryown-hint">Keep it simple — a question a child might ask works best for seeing variation clearly.</div>
+        <button class="tryown-run" id="m1-custom-btn" onclick="runM1Custom()">Ask AI twice</button>
+        <div class="act-sbs" id="m1-csbs" style="display:none;margin-top:10px">
+          <div class="act-sbs-card"><div class="act-sbs-label" style="color:var(--m1)">Answer #1</div><div class="act-sbs-body" id="m1-cr1"></div></div>
+          <div class="act-sbs-card"><div class="act-sbs-label" style="color:var(--m1)">Answer #2</div><div class="act-sbs-body" id="m1-cr2"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="act-notice">
+      <div class="act-notice-h">What to notice</div>
+      <ul>
+        <li>The two answers have the same meaning but different words</li>
+        <li>Neither answer is "wrong" — both are valid</li>
+        <li>This is why AI output varies and why human review matters</li>
+      </ul>
+    </div>
+
+    <button class="facil-toggle" onclick="toggleFacil('m1-facil')">🎯 Show facilitator notes</button>
+    <div class="facil" id="m1-facil">
+      <div class="facil-h">🎯 Facilitator Notes</div>
+      <div class="facil-section"><div class="facil-st">Setup</div><ul><li>Set 5-minute timer</li><li>Tell learners to compare the two answers — what's the same? what's different?</li></ul></div>
+      <div class="facil-section"><div class="facil-st">Debrief questions</div>
+        <p class="facil-q">"Were both answers correct?"</p>
+        <p class="facil-q">"If you used this in a report — which version would you use?"</p>
+        <p class="facil-q">"What does this tell you about AI being 'right' or 'wrong'?"</p>
+      </div>
+      <div class="facil-section"><div class="facil-st">Key insight</div><ul><li>AI has no fixed answer. It generates. This is why you must judge output — not assume it's the same as the last time you asked.</li></ul></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ░░░ S6: M2 DIVIDER ░░░ -->
+<div class="slide" data-index="7" data-m="2">
+  <div class="top-bar"><div class="sc" id="sc7"></div></div>
+  <div class="div-grid">
+    <div class="div-l"><div class="div-idx">Module 02</div><div class="div-num">02</div></div>
+    <div class="div-r">
+      <div class="div-t">How Gen AI<br>Helps</div>
+      <p class="div-d">The three things Gen AI does better than anything before — and how they show up in everyday work, across every business function.</p>
+      <div class="dtags"><span class="dtag">Three superpowers</span><span class="dtag">Everyday uses</span><span class="dtag">Business functions</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S7: 3 SUPERPOWERS ░░░ -->
+<div class="slide" data-index="8" data-m="2">
+  <div class="top-bar"><div class="sc" id="sc8"></div><div class="mb" style="background:var(--m2)">Module 2</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">What it's good at</span></div>
+    <h2>Three superpowers</h2>
+    <p class="sub">Gen AI doesn't think for you. It removes the friction so you can think faster.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#F0FDFE,#E0F7FA);padding:14px">
+        <div class="power-vis">
+          <div class="power pop" data-d="100" style="border-top:2px solid var(--m1)">
+            <div class="power-icon">⚡</div>
+            <div class="power-name">Speed</div>
+            <div class="power-bar"><div class="grow-w" style="background:var(--m1);--w:95%" data-d="400"></div></div>
+            <div class="power-sub">Hours → minutes</div>
+          </div>
+          <div class="power pop" data-d="250" style="border-top:2px solid var(--m2)">
+            <div class="power-icon">🎯</div>
+            <div class="power-name">Personalisation</div>
+            <div class="power-bar"><div class="grow-w" style="background:var(--m2);--w:85%" data-d="600"></div></div>
+            <div class="power-sub">1 message → 1000 versions</div>
+          </div>
+          <div class="power pop" data-d="400" style="border-top:2px solid var(--m5)">
+            <div class="power-icon">🔗</div>
+            <div class="power-name">Synthesis</div>
+            <div class="power-bar"><div class="grow-w" style="background:var(--m5);--w:90%" data-d="800"></div></div>
+            <div class="power-sub">Many sources → one summary</div>
+          </div>
+        </div>
+      </div>
+      <div class="vis-cap">Three things humans struggle with at scale — AI handles instantly</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🧰</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Like having <strong>three new tools in your toolbox</strong>: a faster typist, a translator who speaks every audience, and a researcher who has already read everything. Same brain (yours). Better tools.</p>
+      </div>
+    </div>
+
+    <div class="impacts">
+      <div class="imp"><div class="imp-i">🎯</div><div><h4>The bottleneck shifts</h4><p>The hard work moves from <strong>producing content</strong> to <strong>judging if it's right</strong>. Your knowledge becomes more valuable, not less.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S8: EVERYDAY APPLICATIONS ░░░ -->
+<div class="slide" data-index="9" data-m="2">
+  <div class="top-bar"><div class="sc" id="sc9"></div><div class="mb" style="background:var(--m2)">Module 2</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">Everyday uses</span></div>
+    <h2>What you can use it for today</h2>
+    <p class="sub">If your work involves words, ideas, or information — Gen AI can help right now.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#F0FDFE,#E0F7FA);padding:14px">
+        <div class="apps-vis">
+          <div class="app-c pop" data-d="100"><div class="ic">✍️</div><div class="nm">Write</div><div class="eg">"Draft an email to my team"</div></div>
+          <div class="app-c pop" data-d="200"><div class="ic">📚</div><div class="nm">Summarise</div><div class="eg">"Give me 3 key points"</div></div>
+          <div class="app-c pop" data-d="300"><div class="ic">💡</div><div class="nm">Brainstorm</div><div class="eg">"5 ways to solve this"</div></div>
+          <div class="app-c pop" data-d="400"><div class="ic">🌐</div><div class="nm">Translate</div><div class="eg">"In simple English"</div></div>
+          <div class="app-c pop" data-d="500"><div class="ic">📊</div><div class="nm">Analyse</div><div class="eg">"Find the patterns"</div></div>
+          <div class="app-c pop" data-d="600"><div class="ic">🎯</div><div class="nm">Plan</div><div class="eg">"Make me an outline"</div></div>
+        </div>
+      </div>
+      <div class="vis-cap">Six common tasks — start with one and learn by doing</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🔧</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Think of Gen AI as a <strong>Swiss Army knife for thinking work</strong>. One tool. Many uses. Pick the use that solves your most boring task first — that's where the relief is biggest.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S9: SECTOR INTRO — Where AI has biggest impact ░░░ -->
+<div class="slide" data-index="10" data-m="2">
+  <div class="top-bar"><div class="sc" id="sc10"></div><div class="mb" style="background:var(--m2)">Module 2</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">Sector focus</span></div>
+    <h2>Four sectors. One common theme.</h2>
+    <p class="sub">Gen AI is being deployed at scale across these sectors right now — they all share the same problem: <strong>too much information, not enough time to act on it.</strong></p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#F0FDFE,#E0F7FA);padding:14px;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap">
+          <div class="chip fade-up" style="background:white;border-color:#BFDBFE;color:var(--m1)" data-d="100">📣 Sales</div>
+          <div class="chip fade-up" style="background:white;border-color:#A5F3FC;color:var(--m2)" data-d="200">💬 Service</div>
+          <div class="chip fade-up" style="background:white;border-color:#BBF7D0;color:var(--m4)" data-d="300">🏦 Finance</div>
+          <div class="chip fade-up" style="background:white;border-color:#E0E7FF;color:var(--m5)" data-d="400">🏥 Healthcare</div>
+        </div>
+        <div class="arrow-c fade-up" data-d="600" style="color:var(--m2)">↓</div>
+        <div class="ai-pill pop" data-d="700" style="background:var(--m2)"><div class="bdot"></div><div class="bdot"></div><div class="bdot"></div><span>GEN AI</span></div>
+        <div class="arrow-c fade-up" data-d="900" style="color:var(--m2)">↓</div>
+        <div class="ocard fly-in-r" data-d="1100" style="border-color:var(--m2);background:white">
+          <div class="orow"><div class="od" style="background:var(--m2)"></div><div class="ot">Faster decisions</div></div>
+          <div class="orow"><div class="od" style="background:var(--m2)"></div><div class="ot">Personalised at scale</div></div>
+          <div class="orow"><div class="od" style="background:var(--m2)"></div><div class="ot">Risk surfaced in real time</div></div>
+        </div>
+      </div>
+      <div class="vis-cap">Same engine. Different sectors. Same transformation.</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">⚡</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Like <strong>electricity transforming every industry in the 20th century</strong> — factories, hospitals, banks, shops. Each sector applied it differently, but the underlying shift was the same: humans + power tools = far more output. Gen AI is the same shift, happening now.</p>
+      </div>
+    </div>
+
+    <div class="impacts">
+      <div class="imp"><div class="imp-i">🇸🇬</div><div><h4>Singapore Budget 2026</h4><p>PM Lawrence Wong launched <strong>National AI Missions</strong> targeting finance and healthcare as priority sectors — backed by a new inter-ministerial AI Council.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S10: SALES & MARKETING ░░░ -->
+<div class="slide" data-index="11" data-m="2">
+  <div class="top-bar"><div class="sc" id="sc11"></div><div class="mb" style="background:var(--m2)">Module 2</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">📣 Sector 1 of 4 — Sales &amp; Marketing</span></div>
+    <h2>The right message, to the right person, at the right time</h2>
+    <p class="sub">AI reads customer behaviour across every touchpoint and personalises outreach at a scale no human team could match.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#F0F4FF,#EAF1FF);padding:14px">
+        <div class="flow-iao">
+          <div class="flow-side">
+            <div class="flow-lbl">Customer signals</div>
+            <div class="chip fly-in" style="border-color:#BFDBFE;color:var(--m1)" data-d="100">Browsing</div>
+            <div class="chip fly-in" style="border-color:#BFDBFE;color:var(--m1)" data-d="220">Past buys</div>
+            <div class="chip fly-in" style="border-color:#BFDBFE;color:var(--m1)" data-d="340">Email opens</div>
+            <div class="chip fly-in" style="border-color:#BFDBFE;color:var(--m1)" data-d="460">Demographics</div>
+          </div>
+          <div class="flow-mid">
+            <div class="arrow-c fade-up" data-d="600" style="color:var(--m1)">→</div>
+            <div class="ai-pill-lg pop" data-d="700" style="background:var(--m1)"><div class="em">🎯</div><div class="tx">GEN AI</div></div>
+            <div class="arrow-c fade-up" data-d="900" style="color:var(--m1)">→</div>
+          </div>
+          <div class="flow-side">
+            <div class="flow-lbl" style="color:var(--m1)">Personalised</div>
+            <div class="ocard fly-in-r" data-d="1100">
+              <div class="orow"><div class="od" style="background:var(--m1)"></div><div class="ot">Subject line</div></div>
+              <div class="orow"><div class="od" style="background:var(--m1)"></div><div class="ot">Recommended product</div></div>
+              <div class="orow"><div class="od" style="background:var(--m1)"></div><div class="ot">Best send time</div></div>
+              <div class="orow"><div class="od" style="background:var(--m1)"></div><div class="ot">Tone of voice</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="vis-cap">Every customer gets a version crafted for them — generated in milliseconds</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🧠</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>A <strong>sales rep who has memorised every customer's preferences</strong> and writes a perfectly tailored pitch for each one — simultaneously. A human manages 50 accounts. AI personalises for 5 million.</p>
+      </div>
+    </div>
+
+    <div class="impacts">
+      <div class="imp"><div class="imp-i">✍️</div><div><h4>Ad copy at scale</h4><p>Hundreds of campaign variants from one brief — tested, refined, deployed without a content bottleneck.</p></div></div>
+      <div class="imp"><div class="imp-i">🎯</div><div><h4>Smarter lead scoring</h4><p>AI identifies which leads will convert based on behavioural signals — sales teams focus where it matters.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S11: CUSTOMER SERVICE ░░░ -->
+<div class="slide" data-index="12" data-m="2">
+  <div class="top-bar"><div class="sc" id="sc12"></div><div class="mb" style="background:var(--m2)">Module 2</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">💬 Sector 2 of 4 — Customer Service</span></div>
+    <h2>Every query answered — instantly, at any hour</h2>
+    <p class="sub">AI handles routine queries at volume and routes complex cases to humans — freeing agents for work that needs real judgment.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#F0FDFE,#E0F7FA);padding:14px;flex-direction:column;gap:9px">
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:5px">
+          <div class="chip fade-up" style="border-color:#A5F3FC;color:var(--m2)" data-d="50">Track order</div>
+          <div class="chip fade-up" style="border-color:#A5F3FC;color:var(--m2)" data-d="150">Reset password</div>
+          <div class="chip fade-up" style="border-color:#A5F3FC;color:var(--m2)" data-d="250">Billing</div>
+          <div class="chip fade-up" style="border-color:#A5F3FC;color:var(--m2)" data-d="350">Cancel</div>
+          <div class="chip fade-up" style="border-color:#A5F3FC;color:var(--m2)" data-d="450">Complaint</div>
+        </div>
+        <div class="ai-pill pop" data-d="650" style="background:var(--m2)"><div class="bdot"></div><div class="bdot"></div><div class="bdot"></div><span>AI TRIAGE</span></div>
+        <div style="display:flex;gap:9px;justify-content:center;width:100%">
+          <div class="pop" data-d="900" style="flex:1;max-width:160px;padding:12px;border-radius:9px;border:1px solid #A5F3FC;background:white;text-align:center;display:flex;flex-direction:column;gap:4px;align-items:center">
+            <div style="font-size:1.2rem">⚡</div>
+            <div style="font-size:9px;font-weight:700;color:var(--m2);letter-spacing:.07em;text-transform:uppercase">Auto-resolved</div>
+            <div style="font-size:18px;font-weight:700;color:var(--m2)">80%</div>
+            <div style="font-size:9px;color:var(--ink2);line-height:1.4">Under 5 seconds</div>
+          </div>
+          <div class="pop" data-d="1050" style="flex:1;max-width:160px;padding:12px;border-radius:9px;border:1px solid #FDBA74;background:white;text-align:center;display:flex;flex-direction:column;gap:4px;align-items:center">
+            <div style="font-size:1.2rem">👤</div>
+            <div style="font-size:9px;font-weight:700;color:var(--m3);letter-spacing:.07em;text-transform:uppercase">Escalated</div>
+            <div style="font-size:18px;font-weight:700;color:var(--m3)">20%</div>
+            <div style="font-size:9px;color:var(--ink2);line-height:1.4">With full context</div>
+          </div>
+        </div>
+      </div>
+      <div class="vis-cap">AI handles the volume — humans handle what actually matters</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🎧</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>A <strong>reception desk that never closes and handles 10,000 visitors at once</strong>. Simple requests resolved on the spot. Complex ones forwarded — with a complete briefing note already prepared.</p>
+      </div>
+    </div>
+
+    <div class="impacts">
+      <div class="imp"><div class="imp-i">⏱️</div><div><h4>Response time: hours → seconds</h4><p>Customers get instant replies to routine queries. 24/7. No wait times. No staffing constraints.</p></div></div>
+      <div class="imp"><div class="imp-i">🧩</div><div><h4>Agents focus on harder problems</h4><p>Empathy and judgment applied where they actually matter — emotionally complex, high-stakes interactions.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S12: FINANCE ░░░ -->
+<div class="slide" data-index="13" data-m="2">
+  <div class="top-bar"><div class="sc" id="sc13"></div><div class="mb" style="background:var(--m2)">Module 2</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">🏦 Sector 3 of 4 — Finance · National AI Mission</span></div>
+    <h2>Reading every transaction in real time</h2>
+    <p class="sub">Finance generates more structured data than almost any other industry. AI reads it all — surfacing risk, generating reports, flagging anomalies.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);padding:14px">
+        <div class="flow-iao">
+          <div class="flow-side">
+            <div class="flow-lbl">Live data</div>
+            <div class="chip fly-in" style="border-color:#BBF7D0;color:var(--m4);font-family:'Courier New',monospace;font-size:9px" data-d="100">TXN #4819</div>
+            <div class="chip fly-in" style="border-color:#BBF7D0;color:var(--m4);font-family:'Courier New',monospace;font-size:9px" data-d="200">TXN #4820</div>
+            <div class="chip fly-in" style="border-color:#FCA5A5;color:#B91C1C;font-family:'Courier New',monospace;font-size:9px;background:#FEF2F2" data-d="300">⚠ TXN #4821</div>
+            <div class="chip fly-in" style="border-color:#BBF7D0;color:var(--m4);font-family:'Courier New',monospace;font-size:9px" data-d="400">TXN #4822</div>
+          </div>
+          <div class="flow-mid">
+            <div class="arrow-c fade-up" data-d="600" style="color:var(--m4)">→</div>
+            <div class="ai-pill-lg pop" data-d="700" style="background:var(--m4)"><div class="em">🔍</div><div class="tx">GEN AI</div></div>
+            <div class="arrow-c fade-up" data-d="900" style="color:var(--m4)">→</div>
+          </div>
+          <div class="flow-side">
+            <div class="flow-lbl" style="color:var(--m4)">Analyst output</div>
+            <div class="ocard fly-in-r" data-d="1100">
+              <div class="orow"><div class="od" style="background:#EF4444"></div><div class="ot" style="color:#B91C1C">⚠ Fraud alert</div></div>
+              <div class="orow"><div class="od" style="background:var(--m4)"></div><div class="ot">Risk score: LOW</div></div>
+              <div class="orow"><div class="od" style="background:var(--m4)"></div><div class="ot">Compliance ✓</div></div>
+              <div class="orow"><div class="od" style="background:var(--m4)"></div><div class="ot">Daily report</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="vis-cap">Millions of transactions monitored — anomalies flagged the moment they occur</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🔍</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>An <strong>analyst who has read every financial regulation ever written, monitors every transaction in real time, and writes a full risk report before you finish your morning coffee</strong>. Never misses a pattern. Never tires.</p>
+      </div>
+    </div>
+
+    <div class="impacts">
+      <div class="imp"><div class="imp-i">🛡️</div><div><h4>Fraud detection at transaction speed</h4><p>Anomalies flagged the moment they occur — across millions of transactions simultaneously.</p></div></div>
+      <div class="imp"><div class="imp-i">🇸🇬</div><div><h4>Singapore National AI Mission sector</h4><p>Budget 2026 designated finance as a priority. MAS providing the governance framework. Sandboxes for safe testing.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S13: HEALTHCARE ░░░ -->
+<div class="slide" data-index="14" data-m="2">
+  <div class="top-bar"><div class="sc" id="sc14"></div><div class="mb" style="background:var(--m2)">Module 2</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">🏥 Sector 4 of 4 — Healthcare · National AI Mission</span></div>
+    <h2>Every patient's history, synthesised in seconds</h2>
+    <p class="sub">Clinicians make critical decisions under time pressure with incomplete information. AI synthesises patient data so they can focus on the patient.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#EEF2FF,#E0E7FF);padding:14px">
+        <div class="flow-iao">
+          <div class="flow-side">
+            <div class="flow-lbl">Patient data</div>
+            <div class="chip fly-in" style="border-color:#E0E7FF;color:var(--m5)" data-d="100">Records</div>
+            <div class="chip fly-in" style="border-color:#E0E7FF;color:var(--m5)" data-d="220">Lab results</div>
+            <div class="chip fly-in" style="border-color:#E0E7FF;color:var(--m5)" data-d="340">Scan images</div>
+            <div class="chip fly-in" style="border-color:#E0E7FF;color:var(--m5)" data-d="460">Medications</div>
+          </div>
+          <div class="flow-mid">
+            <div class="arrow-c fade-up" data-d="600" style="color:var(--m5)">→</div>
+            <div class="ai-pill-lg pop" data-d="700" style="background:var(--m5)"><div class="em">🩺</div><div class="tx">GEN AI</div></div>
+            <div class="arrow-c fade-up" data-d="900" style="color:var(--m5)">→</div>
+          </div>
+          <div class="flow-side">
+            <div class="flow-lbl" style="color:var(--m5)">Clinical support</div>
+            <div class="ocard fly-in-r" data-d="1100">
+              <div class="orow"><div class="od" style="background:var(--m5)"></div><div class="ot">Patient summary</div></div>
+              <div class="orow"><div class="od" style="background:#EF4444"></div><div class="ot" style="color:#B91C1C">⚠ Drug interaction</div></div>
+              <div class="orow"><div class="od" style="background:var(--m5)"></div><div class="ot">Similar cases</div></div>
+              <div class="orow"><div class="od" style="background:var(--m5)"></div><div class="ot">Discharge notes</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="vis-cap">AI synthesises years of patient history — the clinician makes every decision</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🩺</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>A <strong>specialist colleague who has studied every published medical paper and every case in the hospital</strong> — standing quietly beside the doctor, surfacing relevant patterns. The doctor still makes the diagnosis. But nothing relevant gets missed.</p>
+      </div>
+    </div>
+
+    <div class="impacts">
+      <div class="imp"><div class="imp-i">⏱️</div><div><h4>Faster, more informed decisions</h4><p>Patient history surfaced in seconds — reducing cognitive load during high-pressure moments.</p></div></div>
+      <div class="imp"><div class="imp-i">🇸🇬</div><div><h4>Singapore National AI Mission sector</h4><p>Budget 2026 designated healthcare as a priority. Health Minister Ong Ye Kung sits on the National AI Council.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ M2 ACTIVITY: Speed Superpower ░░░ -->
+<div class="slide act-color" data-index="15" data-m="2">
+  <div class="top-bar">
+    <div class="sc" id="sc15"></div>
+    <div class="act-time">⏱ 5 min</div>
+  </div>
+  <div class="body">
+    <div class="hd"><span class="lbl" style="color:var(--act)">🧪 Activity 2 of 4 — Module 2</span></div>
+    <h2 style="margin-bottom:6px">Test the Speed Superpower</h2>
+    <p class="sub">One piece of text. Three audiences. Three completely different summaries — generated in seconds. This is <strong>speed and personalisation at scale</strong> in one task.</p>
+
+    <div class="qs-box">
+      <div class="qs-h"><span class="qs-h-tag">⚡ Quick Start</span><span class="qs-desc">— uses a pre-loaded article</span></div>
+      <div class="act-step-row">
+        <div class="act-sn active" id="m2-sn">1</div>
+        <div class="act-step-content">
+          <div class="act-step-q"><strong>Pre-filled article:</strong> A short news article about AI in the workplace is ready to use.</div>
+          <button class="act-step-btn" id="m2-btn" onclick="runM2Quick()"><span>Generate 3 versions</span><span>→</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="act-col3" id="m2-col3" style="display:none">
+      <div class="act-col3-card">
+        <div class="act-col3-label" style="color:var(--m1)">📊 For the CEO</div>
+        <div class="act-col3-body" id="m2-ceo"></div>
+      </div>
+      <div class="act-col3-card">
+        <div class="act-col3-label" style="color:var(--m2)">💬 For a Colleague</div>
+        <div class="act-col3-body" id="m2-col"></div>
+      </div>
+      <div class="act-col3-card">
+        <div class="act-col3-label" style="color:var(--m4)">🧒 For a 10-year-old</div>
+        <div class="act-col3-body" id="m2-kid"></div>
+      </div>
+    </div>
+
+    <div class="act-reveal" id="m2-reveal" style="border-left-color:var(--m2);background:var(--m2bg)">
+      <div class="act-reveal-icon">⚡</div>
+      <div>
+        <h4 style="color:var(--m2)">Same content. Three audiences. Seconds.</h4>
+        <p style="color:#164E63">This used to take a skilled communicator 20–30 minutes per version. AI produced all three simultaneously. The content is the same — the framing, vocabulary, and structure shifts for each reader.</p>
+      </div>
+    </div>
+
+    <div class="tryown" id="m2-tryown">
+      <button class="tryown-toggle" onclick="toggleOwn('m2-tryown')"><span>💭 Paste your own text</span><span class="chev">▼</span></button>
+      <div class="tryown-content">
+        <label>Paste any text — email, article, report (up to 2000 characters):</label>
+        <textarea id="m2-custom" maxlength="2000" rows="5" placeholder="Paste any text here — a news article, a long email, a policy document, meeting notes..."></textarea>
+        <div class="tryown-hint">The longer and more complex the text, the more impressive the result.</div>
+        <button class="tryown-run" id="m2-custom-btn" onclick="runM2Custom()">Generate 3 versions</button>
+        <div class="act-col3" id="m2-ccol3" style="display:none;margin-top:10px">
+          <div class="act-col3-card"><div class="act-col3-label" style="color:var(--m1)">📊 For the CEO</div><div class="act-col3-body" id="m2-cceo"></div></div>
+          <div class="act-col3-card"><div class="act-col3-label" style="color:var(--m2)">💬 For a Colleague</div><div class="act-col3-body" id="m2-ccol"></div></div>
+          <div class="act-col3-card"><div class="act-col3-label" style="color:var(--m4)">🧒 For a 10-year-old</div><div class="act-col3-body" id="m2-ckid"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="act-notice">
+      <div class="act-notice-h">What to notice</div>
+      <ul>
+        <li>The CEO version is concise with business impact</li>
+        <li>The colleague version is conversational and direct</li>
+        <li>The child version uses analogies and simple words</li>
+      </ul>
+    </div>
+
+    <button class="facil-toggle" onclick="toggleFacil('m2-facil')">🎯 Show facilitator notes</button>
+    <div class="facil" id="m2-facil">
+      <div class="facil-h">🎯 Facilitator Notes</div>
+      <div class="facil-section"><div class="facil-st">Setup</div><ul><li>Pre-loaded article is ready — no paste needed for Quick Start</li><li>Encourage learners to paste their own work email or article</li></ul></div>
+      <div class="facil-section"><div class="facil-st">Debrief questions</div>
+        <p class="facil-q">"How long would these three versions have taken you to write manually?"</p>
+        <p class="facil-q">"Which version is closest to what you'd actually send?"</p>
+        <p class="facil-q">"Where in your work this week could you use this?"</p>
+      </div>
+      <div class="facil-section"><div class="facil-st">Key insight</div><ul><li>Speed + personalisation in one task. The bottleneck shifts from writing to judging which version to use.</li></ul></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ░░░ S10: M3 DIVIDER ░░░ -->
+<div class="slide" data-index="16" data-m="3">
+  <div class="top-bar"><div class="sc" id="sc16"></div></div>
+  <div class="div-grid">
+    <div class="div-l"><div class="div-idx">Module 03</div><div class="div-num">03</div></div>
+    <div class="div-r">
+      <div class="div-t">Limitations<br>&amp; Risks</div>
+      <p class="div-d">Knowing where Gen AI fails matters as much as knowing where it helps. Five risks every user should understand — explained simply.</p>
+      <div class="dtags"><span class="dtag">Hallucination</span><span class="dtag">Outdated knowledge</span><span class="dtag">Bias</span><span class="dtag">Over-reliance</span><span class="dtag">Privacy</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S11: HALLUCINATION ░░░ -->
+<div class="slide" data-index="17" data-m="3">
+  <div class="top-bar"><div class="sc" id="sc17"></div><div class="mb" style="background:var(--m3)">Module 3</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">Risk #1 — The big one</span></div>
+    <h2>Hallucination</h2>
+    <p class="sub">When AI sounds completely confident — but is making things up. The hardest risk to spot, because it doesn't feel like a mistake.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#FFF7ED,#FFEDD5);padding:14px;flex-direction:column">
+        <div class="hal-vis">
+          <div class="qa-row fade-up" data-d="100">
+            <div class="qa-av usr">Q</div>
+            <div class="qa-bub">
+              <div class="qa-name">You ask</div>
+              <div class="qa-msg">"Who won the 1987 Best Author award?"</div>
+            </div>
+          </div>
+          <div class="qa-row fade-up" data-d="500" style="background:var(--m3bg);border-color:var(--m3l)">
+            <div class="qa-av ai">AI</div>
+            <div class="qa-bub">
+              <div class="qa-name" style="color:var(--m3)">AI confidently replies</div>
+              <div class="qa-msg">"It was Margaret Thompson for her novel <em>The Hidden Garden</em>, published in 1986."</div>
+              <div class="verify-tag">⚠ The award and book don't exist</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="vis-cap">Sounds completely plausible. Completely invented.</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🎓</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Like a <strong>student who never says "I don't know"</strong>. Instead of admitting it, they invent a confident-sounding answer. The danger isn't that they sound unsure — it's that they sound <em>completely sure</em>.</p>
+      </div>
+    </div>
+
+    <div class="impacts">
+      <div class="imp"><div class="imp-i">✅</div><div><h4>The fix</h4><p><strong>Never trust AI for facts that matter</strong> — names, dates, numbers, regulations. Always verify from a reliable source before acting.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S12: OTHER 4 RISKS ░░░ -->
+<div class="slide" data-index="18" data-m="3">
+  <div class="top-bar"><div class="sc" id="sc18"></div><div class="mb" style="background:var(--m3)">Module 3</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">Risks 2–5</span></div>
+    <h2>Four more limits to remember</h2>
+    <p class="sub">Each one is simple — but together they shape how to use AI well.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#FFF7ED,#FFEDD5);padding:12px">
+        <div class="risk-vis">
+          <div class="risk-c pop" data-d="100">
+            <h4>⏰ Outdated</h4>
+            <p>AI doesn't know what's happened since its training cutoff.</p>
+            <div class="eg">Like a friend just back from a long isolated trip.</div>
+          </div>
+          <div class="risk-c pop" data-d="220">
+            <h4>⚖️ Biased</h4>
+            <p>It learned from human writing — and absorbed our biases.</p>
+            <div class="eg">Reflects whatever was common in its training, not what's fair.</div>
+          </div>
+          <div class="risk-c pop" data-d="340">
+            <h4>🧠 Habit-forming</h4>
+            <p>The more AI does for you, the less your own skills get used.</p>
+            <div class="eg">Use it to work faster — not to stop thinking.</div>
+          </div>
+          <div class="risk-c pop" data-d="460">
+            <h4>🔒 Privacy</h4>
+            <p>Anything you type in may be stored or used in future training.</p>
+            <div class="eg">Treat it like a public space, not a private chat.</div>
+          </div>
+        </div>
+      </div>
+      <div class="vis-cap">Each has a simple analogy — that's how to remember them</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🚗</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Like <strong>knowing the limits of your car</strong>. You don't refuse to drive because cars can crash — you learn the limits, drive carefully, and the car becomes incredibly useful. Same with AI.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ M3 ACTIVITY: Frozen in Time ░░░ -->
+<div class="slide act-color" data-index="19" data-m="3">
+  <div class="top-bar">
+    <div class="sc" id="sc19"></div>
+    <div class="act-time">⏱ 5 min</div>
+  </div>
+  <div class="body">
+    <div class="hd"><span class="lbl" style="color:var(--act)">🧪 Activity 3 of 4 — Module 3</span></div>
+    <h2 style="margin-bottom:6px">Frozen in Time</h2>
+    <p class="sub">Watch what happens when you ask an older AI about events it doesn't know about. The lesson: <strong>AI can sound completely confident — about yesterday's truth.</strong></p>
+
+    <div class="qs-box">
+      <div class="qs-h"><span class="qs-h-tag">⚡ Quick Start</span><span class="qs-desc">— click each step in order</span></div>
+      <div class="act-step-row">
+        <div class="act-sn active" id="m3-n1">1</div>
+        <div class="act-step-content">
+          <div class="act-step-q"><strong>Ask:</strong> "Who is the current US President?"</div>
+          <button class="act-step-btn" id="m3-btn1" onclick="runM3(1)"><span>Run Step 1</span><span>→</span></button>
+          <div class="act-response" id="m3-r1"><div class="act-r-meta"><span class="act-r-prov r-prov-m3" id="m3-p1"></span></div><div class="act-r-text" id="m3-t1"></div></div>
+        </div>
+      </div>
+      <div class="act-step-row">
+        <div class="act-sn" id="m3-n2">2</div>
+        <div class="act-step-content">
+          <div class="act-step-q"><strong>Ask:</strong> "Who won the 2024 US presidential election?"</div>
+          <button class="act-step-btn" id="m3-btn2" onclick="runM3(2)" disabled><span>Run Step 2</span><span>→</span></button>
+          <div class="act-response" id="m3-r2"><div class="act-r-meta"><span class="act-r-prov r-prov-m3" id="m3-p2"></span></div><div class="act-r-text" id="m3-t2"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="act-reveal" id="m3-reveal" style="border-left-color:var(--m3);background:var(--m3bg)">
+      <div class="act-reveal-icon">💡</div>
+      <div>
+        <h4 style="color:var(--m3)">What just happened?</h4>
+        <p style="color:#7C2D12">This AI's training stopped <strong>before the 2024 US election</strong> — yet it answered Step 1 with full confidence. In real work, this is how AI gives you <strong>yesterday's truth as today's fact</strong> — outdated regulations, replaced executives, old prices, retired policies. <strong>Always verify time-sensitive information.</strong></p>
+      </div>
+    </div>
+
+    <div class="tryown" id="m3-tryown">
+      <button class="tryown-toggle" onclick="toggleOwn('m3-tryown')"><span>💭 Try your own time-sensitive question</span><span class="chev">▼</span></button>
+      <div class="tryown-content">
+        <label>Ask the older AI any question about recent events:</label>
+        <textarea id="m3-custom" maxlength="300" placeholder="e.g., Who is the current Singapore Prime Minister? · What is the latest iPhone model? · Who won the 2024 Paris Olympics most gold medals?"></textarea>
+        <div class="tryown-hint">Try asking about something specific that has changed recently — names, prices, latest releases, current events.</div>
+        <button class="tryown-run" id="m3-custom-btn" onclick="runM3Custom()">Ask the older AI</button>
+        <div class="act-response" id="m3-cr" style="margin-top:10px"><div class="act-r-meta"><span class="act-r-prov r-prov-m3" id="m3-cp"></span></div><div class="act-r-text" id="m3-ct"></div></div>
+      </div>
+    </div>
+
+    <div class="act-notice">
+      <div class="act-notice-h">What to notice</div>
+      <ul>
+        <li>How confident and specific the AI sounds — even when wrong</li>
+        <li>Step 2 may invent details, names, or vote counts that never existed</li>
+        <li>The provider badge shows Sept 2021 cutoff — explaining everything</li>
+      </ul>
+    </div>
+
+    <button class="facil-toggle" onclick="toggleFacil('m3-facil')">🎯 Show facilitator notes</button>
+    <div class="facil" id="m3-facil">
+      <div class="facil-h">🎯 Facilitator Notes</div>
+      <div class="facil-section"><div class="facil-st">During</div><ul><li>Step 1 — AI says "Biden" confidently. In 2026, everyone knows this is wrong.</li><li>Step 2 — AI invents an election result. Names, percentages, "historic moments" — all fabricated.</li><li>Note the variation across the room — different learners may get different invented results.</li></ul></div>
+      <div class="facil-section"><div class="facil-st">Debrief questions</div>
+        <p class="facil-q">"How sure did the AI sound in Step 1?"</p>
+        <p class="facil-q">"In Step 2 — what specific details did it invent?"</p>
+        <p class="facil-q">"Where in YOUR work could a confidently-wrong AI answer cause a real problem?"</p>
+      </div>
+      <div class="facil-section"><div class="facil-st">Key insight</div><ul><li>Confidence ≠ accuracy. The danger isn't AI being unsure — it's AI being confidently outdated or wrong.</li></ul></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ░░░ S13: M4 DIVIDER ░░░ -->
+<div class="slide" data-index="20" data-m="4">
+  <div class="top-bar"><div class="sc" id="sc20"></div></div>
+  <div class="div-grid">
+    <div class="div-l"><div class="div-idx">Module 04</div><div class="div-num">04</div></div>
+    <div class="div-r">
+      <div class="div-t">Safeguards &amp;<br>Responsible Use</div>
+      <p class="div-d">The habits and frameworks that turn AI from a risky shortcut into a reliable partner. Three things to put into practice.</p>
+      <div class="dtags"><span class="dtag">Human in the loop</span><span class="dtag">Better prompts</span><span class="dtag">Governance</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S14: HUMAN IN LOOP ░░░ -->
+<div class="slide" data-index="21" data-m="4">
+  <div class="top-bar"><div class="sc" id="sc21"></div><div class="mb" style="background:var(--m4)">Module 4</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">Core principle</span></div>
+    <h2>Human in the Loop</h2>
+    <p class="sub">AI doesn't replace your judgment. It works <strong>with you</strong> — and you stay in control of what goes out the door.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);padding:14px;flex-direction:column;gap:8px">
+        <div class="loop-vis">
+          <div class="loop-row">
+            <div class="loop-step pop" data-d="100"><div class="ic">🤖</div><div class="nm">AI drafts</div><div class="ds">Generates first version</div></div>
+            <div class="loop-arr fade-up" data-d="350">→</div>
+            <div class="loop-step pop" data-d="500"><div class="ic">👤</div><div class="nm">You review</div><div class="ds">Apply your judgment</div></div>
+            <div class="loop-arr fade-up" data-d="750">→</div>
+            <div class="loop-step pop" data-d="900"><div class="ic">✅</div><div class="nm">You approve</div><div class="ds">Own the outcome</div></div>
+          </div>
+          <div class="loop-back fade-up" data-d="1200">↺ Refine and iterate</div>
+        </div>
+      </div>
+      <div class="vis-cap">AI handles the volume. You handle the judgment.</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">✈️</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Like a <strong>pilot using autopilot</strong>. Autopilot does most of the flying. The pilot stays in the seat, watches everything, and makes every important call. Nobody would board a plane where autopilot was in charge alone — and nobody should send out AI output that no human reviewed.</p>
+      </div>
+    </div>
+
+    <div class="impacts">
+      <div class="imp"><div class="imp-i">⚖️</div><div><h4>Accountability stays with you</h4><p>"The AI did it" is never a defence. Whoever pressed send is responsible.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S15: PROMPT QUALITY ░░░ -->
+<div class="slide" data-index="22" data-m="4">
+  <div class="top-bar"><div class="sc" id="sc22"></div><div class="mb" style="background:var(--m4)">Module 4</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">Practical skill</span></div>
+    <h2>Better prompts = better answers</h2>
+    <p class="sub">Same AI. Same task. Just a better way to ask.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);padding:14px;flex-direction:column;gap:8px">
+        <div class="prompt-vis">
+          <div class="pcompare bad fade-up" data-d="100">
+            <div class="pc-tag">❌ Vague prompt</div>
+            <div class="pc-pr">"Write something about AI."</div>
+            <div class="pc-result">→ Generic, unfocused, probably useless</div>
+          </div>
+          <div class="pcompare good fade-up" data-d="500">
+            <div class="pc-tag">✅ Clear prompt</div>
+            <div class="pc-pr">"Write a 200-word intro about AI for first-time users. Plain English. No jargon. Friendly tone."</div>
+            <div class="pc-result">→ Specific, ready-to-use, on point</div>
+          </div>
+        </div>
+      </div>
+      <div class="vis-cap">Five seconds more thinking saves five minutes editing</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🍽️</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Like <strong>ordering food at a restaurant</strong>. "Bring me something" gets you whatever's nearest. "I'd like the salmon, medium-rare, with the sauce on the side" gets you exactly what you wanted. Same kitchen. Better order.</p>
+      </div>
+    </div>
+
+    <div class="impacts">
+      <div class="imp"><div class="imp-i">🎯</div><div><h4>The five basics</h4><p>Tell the AI: <strong>who you are, who it's for, what format, what tone, and what to avoid</strong>. That's it. Five seconds — better output every time.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S16: ISO 5338 ░░░ -->
+<div class="slide" data-index="23" data-m="4">
+  <div class="top-bar"><div class="sc" id="sc23"></div><div class="mb" style="background:var(--m4)">Module 4</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">Governance</span></div>
+    <h2>Six principles for using AI responsibly</h2>
+    <p class="sub">Based on ISO/IEC 5338 — the international standard for AI lifecycle management. Don't worry about the name. The principles are simple.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);padding:12px">
+        <div class="iso-vis">
+          <div class="iso-c pop" data-d="100"><div class="ic">🔍</div><div class="nm">Transparency</div><div style="font-size:9px;color:var(--ink3);line-height:1.4">Tell people when AI is used</div></div>
+          <div class="iso-c pop" data-d="200"><div class="ic">👤</div><div class="nm">Accountability</div><div style="font-size:9px;color:var(--ink3);line-height:1.4">Someone owns the outcome</div></div>
+          <div class="iso-c pop" data-d="300"><div class="ic">⚠️</div><div class="nm">Risk Management</div><div style="font-size:9px;color:var(--ink3);line-height:1.4">Spot risks before deploying</div></div>
+          <div class="iso-c pop" data-d="400"><div class="ic">📋</div><div class="nm">Documentation</div><div style="font-size:9px;color:var(--ink3);line-height:1.4">Keep records of what AI did</div></div>
+          <div class="iso-c pop" data-d="500"><div class="ic">🔄</div><div class="nm">Lifecycle</div><div style="font-size:9px;color:var(--ink3);line-height:1.4">Monitor over time</div></div>
+          <div class="iso-c pop" data-d="600"><div class="ic">🛡️</div><div class="nm">Data</div><div style="font-size:9px;color:var(--ink3);line-height:1.4">Protect what goes in &amp; out</div></div>
+        </div>
+      </div>
+      <div class="vis-cap">Six simple checks — applied consistently</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🚦</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Like <strong>traffic rules in a busy city</strong>. Boring on their own. But without them, everything crashes. ISO 5338 is the traffic system for AI — keeps everyone moving safely in the same direction.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ M4 ACTIVITY: Same Task, Two Prompts ░░░ -->
+<div class="slide act-color" data-index="24" data-m="4">
+  <div class="top-bar">
+    <div class="sc" id="sc24"></div>
+    <div class="act-time">⏱ 5 min</div>
+  </div>
+  <div class="body">
+    <div class="hd"><span class="lbl" style="color:var(--act)">🧪 Activity 4 of 4 — Module 4</span></div>
+    <h2 style="margin-bottom:6px">Same Task, Two Prompts</h2>
+    <p class="sub">The AI doesn't change — only the prompt does. Watch how a <strong>vague prompt vs a specific prompt</strong> produces completely different quality output from the same model.</p>
+
+    <div class="qs-box">
+      <div class="qs-h"><span class="qs-h-tag">⚡ Quick Start</span><span class="qs-desc">— see both results side by side</span></div>
+      <div style="margin-bottom:10px">
+        <div class="pc bad"><div class="pc-tag">❌ Vague prompt</div><div class="pc-prompt">"Write something about AI."</div></div>
+        <div class="pc good"><div class="pc-tag">✅ Specific prompt</div><div class="pc-prompt">"Write a 100-word intro about AI for a non-technical workplace audience. Plain English. Friendly tone. End with a question that gets readers thinking."</div></div>
+      </div>
+      <button class="act-step-btn" id="m4-btn" onclick="runM4Compare()" style="width:100%;justify-content:center"><span>Generate both — compare side by side</span><span>→</span></button>
+    </div>
+
+    <div class="act-sbs" id="m4-sbs" style="display:none">
+      <div class="act-sbs-card" style="border-top:2px solid #EF4444">
+        <div class="act-sbs-label" style="color:#B91C1C">❌ Vague prompt result</div>
+        <div class="act-sbs-body" id="m4-vague"></div>
+      </div>
+      <div class="act-sbs-card" style="border-top:2px solid var(--m4)">
+        <div class="act-sbs-label" style="color:var(--m4)">✅ Specific prompt result</div>
+        <div class="act-sbs-body" id="m4-specific"></div>
+      </div>
+    </div>
+
+    <div class="act-reveal" id="m4-reveal" style="border-left-color:var(--m4);background:var(--m4bg)">
+      <div class="act-reveal-icon">🎯</div>
+      <div>
+        <h4 style="color:var(--m4)">Same AI. Completely different quality.</h4>
+        <p style="color:#14532D">The specific prompt produced something you could use immediately. The vague prompt produced something generic you'd need to rewrite. The AI didn't change — your instructions did. Prompting is a skill, and it compounds with practice.</p>
+      </div>
+    </div>
+
+    <div class="act-notice">
+      <div class="act-notice-h">What to notice</div>
+      <ul>
+        <li>The vague result is generic — could be from any source, about anything</li>
+        <li>The specific result is immediately useful — right length, right tone, right audience</li>
+        <li>Same AI model. Different instructions. Completely different quality.</li>
+      </ul>
+    </div>
+
+    <button class="facil-toggle" onclick="toggleFacil('m4-facil')">🎯 Show facilitator notes</button>
+    <div class="facil" id="m4-facil">
+      <div class="facil-h">🎯 Facilitator Notes</div>
+      <div class="facil-section"><div class="facil-st">During</div><ul><li>Read both prompts aloud before clicking — let learners predict the difference</li><li>The contrast in output quality is the lesson</li></ul></div>
+      <div class="facil-section"><div class="facil-st">Debrief questions</div>
+        <p class="facil-q">"Could you use the vague result as-is? What would you need to change?"</p>
+        <p class="facil-q">"What made the specific prompt work better?"</p>
+        <p class="facil-q">"What 5 elements made the specific prompt good — audience, length, tone, format, what else?"</p>
+      </div>
+      <div class="facil-section"><div class="facil-st">Key insight</div><ul><li>Prompting is the skill. Invest 20 extra seconds writing a better prompt — save 10 minutes editing a poor output.</li></ul></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ░░░ S17: M5 DIVIDER (FORGE) ░░░ -->
+<div class="slide" data-index="25" data-m="5">
+  <div class="top-bar"><div class="sc" id="sc25"></div></div>
+  <div class="div-grid">
+    <div class="div-l"><div class="div-idx">Module 05</div><div class="div-num">05</div></div>
+    <div class="div-r">
+      <div class="div-t">Real Application<br>— FORGE</div>
+      <p class="div-d">A practical example of Gen AI applied to a real workplace problem: building learning materials fast, at scale, from a single brief.</p>
+      <div class="dtags"><span class="dtag">Case study</span><span class="dtag">Fast &amp; scalable</span><span class="dtag">Real output</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S18: FORGE HERO ░░░ -->
+<div class="slide" data-index="26" data-m="5">
+  <div class="top-bar"><div class="sc" id="sc26"></div><div class="mb" style="background:var(--m5)">Module 5</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">Case study — FORGE</span></div>
+    <h2>From a brief to a programme — in minutes</h2>
+    <p class="sub">FORGE is a tool that turns a short brief into a complete training programme. A real example of putting Gen AI to work.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#EEF2FF,#E0E7FF);padding:14px">
+        <div class="forge-vis">
+          <div class="forge-in fly-in" data-d="100">
+            <div class="forge-h">📝 Your brief</div>
+            <div class="forge-line">3-hour workshop</div>
+            <div class="forge-line">New financial advisers</div>
+            <div class="forge-line">Insurance basics</div>
+          </div>
+          <div class="flow-mid pop" data-d="500">
+            <div class="ai-pill-lg" style="--accent:var(--m5)"><div class="em">🔨</div><div class="tx">FORGE</div></div>
+          </div>
+          <div class="forge-out fly-in-r" data-d="900">
+            <div class="forge-h">📚 Full programme</div>
+            <div class="forge-line">Learning objectives</div>
+            <div class="forge-line">Session outline</div>
+            <div class="forge-line">Activities &amp; quiz</div>
+            <div class="forge-line">Facilitator guide</div>
+          </div>
+        </div>
+      </div>
+      <div class="vis-cap">Days of design work → minutes of skilled iteration</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🏗️</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Like an <strong>architect's first blueprint</strong>. The architect doesn't draw every line by hand any more — software produces a structured draft from the brief. The architect then refines it, adds judgment, and signs off. <strong>FORGE does the same for learning programmes.</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S19: FORGE IN PRACTICE ░░░ -->
+<div class="slide" data-index="27" data-m="5">
+  <div class="top-bar"><div class="sc" id="sc27"></div><div class="mb" style="background:var(--m5)">Module 5</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">How it delivers</span></div>
+    <h2>Fast. Scalable. Real outputs.</h2>
+    <p class="sub">Three principles that make FORGE useful — and any AI tool worth using.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#EEF2FF,#E0E7FF);padding:14px">
+        <div class="three-pillars">
+          <div class="pc pop" data-d="100"><div class="ic">⚡</div><div class="nm">Fast</div><div class="ds">A brief becomes a programme draft in minutes — not days.</div></div>
+          <div class="pc pop" data-d="280"><div class="ic">📐</div><div class="nm">Scalable</div><div class="ds">One person produces what used to need a full team.</div></div>
+          <div class="pc pop" data-d="460"><div class="ic">🎯</div><div class="nm">Applied</div><div class="ds">Real, structured, professional-quality outputs.</div></div>
+        </div>
+      </div>
+      <div class="vis-cap">Effort shifts from production to curation — the higher-value work</div>
+    </div>
+
+    <div style="margin-bottom:14px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px">Example brief used in FORGE</div>
+      <div class="pbox">"Design a 3-hour workshop for new financial advisers with no prior insurance background. Include 2 scenario exercises, a short quiz, and a facilitator debrief guide."</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🤝</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>The best output comes from <strong>AI + human, working together</strong> — like a junior assistant who drafts everything, and you, the senior expert, who shapes the final version. FORGE shows what that partnership looks like in practice.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S20: M6 DIVIDER (OPTIONAL) ░░░ -->
+<div class="slide" data-index="28" data-m="6">
+  <div class="top-bar">
+    <div class="sc" id="sc28"></div>
+    <button class="optskip" onclick="go(32)">Skip to Close →</button>
+  </div>
+  <div class="div-grid">
+    <div class="div-l"><div class="div-idx">Module 06</div><div class="div-num">06</div></div>
+    <div class="div-r">
+      <div class="div-t">The Way<br>Forward</div>
+      <p class="div-d">How Singapore is approaching AI, what AI literacy actually means for everyday professionals, and where the biggest career opportunity sits.</p>
+      <div class="dtags"><span class="dtag">Singapore strategy</span><span class="dtag">AI literacy</span><span class="dtag">Domain + AI</span></div>
+      <div class="optban">
+        <div>⚡</div>
+        <p><strong>This module is optional.</strong> Include it for senior or policy-focused audiences. Use the button above to skip.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S21: SINGAPORE ░░░ -->
+<div class="slide" data-index="29" data-m="6">
+  <div class="top-bar"><div class="sc" id="sc29"></div><div class="mb" style="background:var(--m6)">Module 6</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">Singapore context</span></div>
+    <h2>How Singapore is approaching AI</h2>
+    <p class="sub">A deliberate, top-down national strategy — building AI capability into every workforce, not just the tech sector.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7);padding:12px">
+        <div class="sg-vis">
+          <div class="sg-row pop" data-d="100"><div class="ic">🇸🇬</div><div><h4>National AI Strategy 2.0</h4><p>Develop AI safely. Position Singapore as a globally trusted AI hub.</p></div></div>
+          <div class="sg-row pop" data-d="220"><div class="ic">📚</div><div><h4>SkillsFuture &amp; SSG</h4><p>Building AI literacy across the entire workforce — not just tech roles.</p></div></div>
+          <div class="sg-row pop" data-d="340"><div class="ic">🏦</div><div><h4>Budget 2026 — National AI Missions</h4><p>Finance, healthcare, manufacturing, logistics — four sector priorities.</p></div></div>
+          <div class="sg-row pop" data-d="460"><div class="ic">🎓</div><div><h4>NTU AI literacy mandate</h4><p>Every undergraduate must complete an AI module — embedded as a baseline.</p></div></div>
+        </div>
+      </div>
+      <div class="vis-cap">A clear national signal — AI literacy is now a baseline expectation</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🏗️</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Like <strong>Singapore building an MRT system before private cars filled the streets</strong>. The infrastructure is being laid down ahead of need. Those who learn to use it early move faster than those who wait.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S22: AI LITERACY ░░░ -->
+<div class="slide" data-index="30" data-m="6">
+  <div class="top-bar"><div class="sc" id="sc30"></div><div class="mb" style="background:var(--m6)">Module 6</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">What AI literacy means</span></div>
+    <h2>Five levels of being AI-literate</h2>
+    <p class="sub">You don't need to be a data scientist. You need to be a <strong>thoughtful user</strong>.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7);padding:12px">
+        <div class="lit-vis">
+          <div class="lit-step fade-up" data-d="100"><div class="lit-n">1</div><div class="lit-text">Understand what AI is</div><div class="lit-bar"><div style="width:20%"></div></div></div>
+          <div class="lit-step fade-up" data-d="240"><div class="lit-n">2</div><div class="lit-text">Use it for real tasks</div><div class="lit-bar"><div style="width:40%"></div></div></div>
+          <div class="lit-step fade-up" data-d="380"><div class="lit-n">3</div><div class="lit-text">Spot when it's wrong</div><div class="lit-bar"><div style="width:60%"></div></div></div>
+          <div class="lit-step fade-up" data-d="520"><div class="lit-n">4</div><div class="lit-text">Apply governance principles</div><div class="lit-bar"><div style="width:80%"></div></div></div>
+          <div class="lit-step fade-up" data-d="660"><div class="lit-n">5</div><div class="lit-text">Translate AI for others</div><div class="lit-bar"><div style="width:100%"></div></div></div>
+        </div>
+      </div>
+      <div class="vis-cap">Each step builds on the last — start where you are</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🚴</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Like <strong>learning to cycle</strong>. First you balance. Then you pedal. Then you steer. Then you avoid traffic. Then you teach someone else. <strong>The fifth level — teaching others — is where the rare talent sits.</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S23: BRIDGE ░░░ -->
+<div class="slide" data-index="31" data-m="6">
+  <div class="top-bar"><div class="sc" id="sc31"></div><div class="mb" style="background:var(--m6)">Module 6</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">The opportunity</span></div>
+    <h2>Domain expertise + AI capability</h2>
+    <p class="sub">The most valuable professional in this era is not the AI expert. It's <strong>the domain expert who knows how to use AI</strong>.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7);padding:14px">
+        <div class="bridge-vis">
+          <div class="br-side fly-in" data-d="100">
+            <div class="br-icon">🏦</div>
+            <div class="br-name">Domain Expertise</div>
+            <div class="br-sub">Industry knowledge<br>Stakeholder dynamics<br>Real-world judgment</div>
+          </div>
+          <div class="br-plus pop" data-d="500">+</div>
+          <div class="br-side fly-in-r" data-d="900">
+            <div class="br-icon">🤖</div>
+            <div class="br-name">AI Capability</div>
+            <div class="br-sub">Effective prompting<br>Critical evaluation<br>Building real tools</div>
+          </div>
+        </div>
+      </div>
+      <div class="vis-cap">Two halves — that together do what neither can alone</div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🏛️</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Like a <strong>doctor who can also use modern equipment</strong>. The equipment doesn't replace the doctor. But the doctor who knows how to use it sees what others miss — and treats more patients better. <strong>The same shift is happening in every profession.</strong></p>
+      </div>
+    </div>
+
+    <div class="impacts">
+      <div class="imp"><div class="imp-i">🎯</div><div><h4>Where the biggest opportunity sits</h4><p>The career advantage isn't in becoming an AI expert. It's in becoming the <strong>domain professional in your field who has clearly learned to use AI well</strong>.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S24: CLOSING ░░░ -->
+<div class="slide" data-index="32" data-m="0">
+  <div class="top-bar"><div class="sc" id="sc32"></div></div>
+  <div class="close-w">
+    <div style="width:32px;height:1px;background:var(--rule);margin:0 auto 28px;position:relative"></div>
+    <div class="close-q">"The question isn't whether AI will change your work. It already has. The question is whether you will be someone who shapes that change — or someone it simply happens to."</div>
+    <div class="close-name">Alvin Nambiar</div>
+    <div class="close-role">L&D Professional · Financial Services · AI Practitioner</div>
+    <div class="close-chips">
+      <span class="close-chip">🔨 FORGE — AI Programme Builder</span>
+      <span class="close-chip">📘 Generative AI for Working Professionals</span>
+    </div>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<!-- NAV -->
+<div class="nav">
+  <button class="nav-btn" id="prevBtn">←</button>
+  <div class="nav-dots" id="dots"></div>
+  <button class="nav-btn" id="nextBtn">→</button>
+</div>
+
+<script>
+const TOTAL=33;let C=0;
+const slides=document.querySelectorAll('.slide');
+const pf=document.getElementById('pf');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+const dots=document.getElementById('dots');
+const modCols=['#374151','#1D4ED8','#1D4ED8','#1D4ED8','#1D4ED8','#1D4ED8','#1D4ED8','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#C2410C','#C2410C','#C2410C','#C2410C','#0D7461','#0D7461','#0D7461','#0D7461','#0D7461','#4F46E5','#4F46E5','#4F46E5','#B45309','#B45309','#B45309','#B45309','#374151'];
+
+for(let i=0;i<TOTAL;i++){
+  const d=document.createElement('button');
+  d.className='dot'+(i===0?' on':'');
+  if(i===0)d.style.background=modCols[0];
+  d.addEventListener('click',(()=>{const n=i;return()=>go(n);})());
+  dots.appendChild(d);
+}
+
+function updateCounters(){
+  for(let i=0;i<TOTAL;i++){const el=document.getElementById('sc'+i);if(el)el.textContent=(i+1)+' / '+TOTAL;}
+}
+
+function animateSlide(idx){
+  const card=slides[idx];
+  card.querySelectorAll('[data-d]').forEach(el=>{
+    const d=parseInt(el.dataset.d)||0;
+    setTimeout(()=>el.classList.add('on'),d);
+  });
+  if(pf){pf.style.background=modCols[idx];}
+}
+function resetSlide(idx){
+  slides[idx].querySelectorAll('[data-d]').forEach(el=>el.classList.remove('on'));
+}
+
+function upd(){
+  pf.style.width=(C/(TOTAL-1)*100)+'%';
+  prevBtn.disabled=C===0;nextBtn.disabled=C===TOTAL-1;
+  document.querySelectorAll('.dot').forEach((d,i)=>{
+    d.classList.toggle('on',i===C);
+    d.style.background=i===C?modCols[C]:'';
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function go(n){
+  if(n<0||n>=TOTAL||n===C)return;
+  resetSlide(C);
+  slides[C].classList.remove('active');
+  C=n;
+  slides[C].classList.add('active');
+  upd();
+  setTimeout(()=>animateSlide(C),100);
+}
+
+prevBtn.addEventListener('click',()=>go(C-1));
+nextBtn.addEventListener('click',()=>go(C+1));
+document.addEventListener('keydown',e=>{
+  // Don't navigate when user is typing in an input field
+  const tag=(document.activeElement&&document.activeElement.tagName)||'';
+  if(tag==='TEXTAREA'||tag==='INPUT')return;
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(C+1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();go(C-1);}
+});
+let tx=0,tStartTarget=null;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;tStartTarget=e.target;},{passive:true});
+document.addEventListener('touchend',e=>{
+  const tag=(tStartTarget&&tStartTarget.tagName)||'';
+  if(tag==='TEXTAREA'||tag==='INPUT'||tag==='BUTTON')return;
+  const d=tx-e.changedTouches[0].clientX;
+  if(Math.abs(d)>50){d>0?go(C+1):go(C-1);}
+});
+
+updateCounters();upd();
+setTimeout(()=>animateSlide(0),200);
+
+// ═══════════════════════════════════════════════
+// ACTIVITY JS — Worker calls + interaction handlers
+// ═══════════════════════════════════════════════
+const W = 'https://alvin-ai-training-worker.alvin048302.workers.dev';
+
+const SAMPLE_ARTICLE = `Artificial intelligence is rapidly changing how companies operate across Singapore. A recent survey found that 67% of Singapore businesses have begun integrating AI tools into daily workflows, with the most common applications in customer service, content creation, and data analysis. Companies report productivity gains of between 20 to 40 percent for tasks involving writing and research. However, experts caution that AI works best when guided by experienced professionals who can verify outputs and apply contextual judgment. The Singapore government has committed $1 billion to AI development and workforce upskilling over the next three years, with a focus on ensuring that workers in all sectors can benefit from the technology rather than be displaced by it.`;
+
+function actLoading(){return '<div class="act-sbs-loading"><div class="act-ld"></div><div class="act-ld"></div><div class="act-ld"></div><span class="act-ld-lbl">Generating…</span></div>';}
+function actErr(msg){return `<div class="act-r-err">⚠ ${msg}</div>`;}
+
+async function callWorker(endpoint, body){
+  const res = await fetch(`${W}${endpoint}`, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(body),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || `Error ${res.status}`);
+  return data;
+}
+
+function toggleOwn(id){document.getElementById(id).classList.toggle('open');}
+
+function toggleFacil(id){
+  const f = document.getElementById(id);
+  f.classList.toggle('visible');
+  // Update toggle button label
+  const btns = document.querySelectorAll('.facil-toggle');
+  btns.forEach(b => {
+    const oc = b.getAttribute('onclick') || '';
+    if (oc.includes(id)) {
+      b.textContent = f.classList.contains('visible') ? '🎯 Hide facilitator notes' : '🎯 Show facilitator notes';
+    }
+  });
+}
+
+function renderBullets(arr, el){
+  if (Array.isArray(arr)) {
+    el.innerHTML = arr.map(b => `<div class="act-col3-bullet">${b}</div>`).join('');
+  } else {
+    el.textContent = arr;
+  }
+}
+
+// ───── M1: Generation ─────
+async function runM1Quick(){
+  const btn = document.getElementById('m1-btn');
+  btn.disabled = true;
+  btn.querySelector('span').textContent = 'Generating…';
+  const sbs = document.getElementById('m1-sbs');
+  sbs.style.display = 'grid';
+  document.getElementById('m1-r1').innerHTML = actLoading();
+  document.getElementById('m1-r2').innerHTML = actLoading();
+  try {
+    const data = await callWorker('/api/m1-generation', {prompt: 'Explain how Wi-Fi works in 3 sentences.'});
+    document.getElementById('m1-r1').textContent = data.response1;
+    document.getElementById('m1-r2').textContent = data.response2;
+    const sn = document.getElementById('m1-sn');
+    sn.classList.remove('active'); sn.classList.add('done'); sn.textContent = '✓';
+    setTimeout(() => {
+      document.getElementById('m1-reveal').classList.add('visible');
+    }, 400);
+  } catch(e) {
+    document.getElementById('m1-r1').innerHTML = actErr(e.message);
+    document.getElementById('m1-r2').innerHTML = actErr(e.message);
+    btn.disabled = false; btn.querySelector('span').textContent = 'Ask AI twice simultaneously';
+  }
+}
+
+async function runM1Custom(){
+  const input = document.getElementById('m1-custom');
+  const val = input.value.trim();
+  if (!val) { input.focus(); return; }
+  const btn = document.getElementById('m1-custom-btn');
+  btn.disabled = true; btn.textContent = 'Generating…';
+  document.getElementById('m1-csbs').style.display = 'grid';
+  document.getElementById('m1-cr1').innerHTML = actLoading();
+  document.getElementById('m1-cr2').innerHTML = actLoading();
+  try {
+    const data = await callWorker('/api/m1-generation', {prompt: val});
+    document.getElementById('m1-cr1').textContent = data.response1;
+    document.getElementById('m1-cr2').textContent = data.response2;
+  } catch(e) {
+    document.getElementById('m1-cr1').innerHTML = actErr(e.message);
+    document.getElementById('m1-cr2').innerHTML = actErr(e.message);
+  } finally {
+    btn.disabled = false; btn.textContent = 'Ask AI twice';
+  }
+}
+
+// ───── M2: Speed + Personalisation ─────
+function renderM2(data, ceo, col, kid){
+  renderBullets(data.ceo, document.getElementById(ceo));
+  renderBullets(data.colleague, document.getElementById(col));
+  renderBullets(data.child, document.getElementById(kid));
+}
+
+async function runM2Quick(){
+  const btn = document.getElementById('m2-btn');
+  btn.disabled = true; btn.querySelector('span').textContent = 'Generating…';
+  document.getElementById('m2-col3').style.display = 'grid';
+  ['m2-ceo','m2-col','m2-kid'].forEach(id => document.getElementById(id).innerHTML = actLoading());
+  try {
+    const data = await callWorker('/api/m2-personalise', {text: SAMPLE_ARTICLE});
+    renderM2(data, 'm2-ceo', 'm2-col', 'm2-kid');
+    const sn = document.getElementById('m2-sn');
+    sn.classList.remove('active'); sn.classList.add('done'); sn.textContent = '✓';
+    setTimeout(() => {
+      document.getElementById('m2-reveal').classList.add('visible');
+    }, 400);
+  } catch(e) {
+    ['m2-ceo','m2-col','m2-kid'].forEach(id => document.getElementById(id).innerHTML = actErr(e.message));
+    btn.disabled = false; btn.querySelector('span').textContent = 'Generate 3 versions';
+  }
+}
+
+async function runM2Custom(){
+  const input = document.getElementById('m2-custom');
+  const val = input.value.trim();
+  if (!val) { input.focus(); return; }
+  const btn = document.getElementById('m2-custom-btn');
+  btn.disabled = true; btn.textContent = 'Generating…';
+  document.getElementById('m2-ccol3').style.display = 'grid';
+  ['m2-cceo','m2-ccol','m2-ckid'].forEach(id => document.getElementById(id).innerHTML = actLoading());
+  try {
+    const data = await callWorker('/api/m2-personalise', {text: val});
+    renderM2(data, 'm2-cceo', 'm2-ccol', 'm2-ckid');
+  } catch(e) {
+    ['m2-cceo','m2-ccol','m2-ckid'].forEach(id => document.getElementById(id).innerHTML = actErr(e.message));
+  } finally {
+    btn.disabled = false; btn.textContent = 'Generate 3 versions';
+  }
+}
+
+// ───── M3: Frozen in Time ─────
+async function runM3(step){
+  const btn = document.getElementById(`m3-btn${step}`);
+  const resp = document.getElementById(`m3-r${step}`);
+  const provEl = document.getElementById(`m3-p${step}`);
+  const textEl = document.getElementById(`m3-t${step}`);
+  const numEl = document.getElementById(`m3-n${step}`);
+
+  btn.disabled = true;
+  resp.classList.add('visible');
+  provEl.textContent = '';
+  textEl.innerHTML = '<div class="act-loading"><div class="act-ld"></div><div class="act-ld"></div><div class="act-ld"></div><span class="act-ld-lbl">Asking the older AI…</span></div>';
+
+  try {
+    const data = await callWorker('/api/m3-cutoff', {step});
+    provEl.textContent = data.provider || '';
+    textEl.textContent = data.response;
+    numEl.classList.remove('active'); numEl.classList.add('done'); numEl.textContent = '✓';
+
+    if (step === 1) {
+      const btn2 = document.getElementById('m3-btn2');
+      const n2 = document.getElementById('m3-n2');
+      btn2.disabled = false; n2.classList.add('active');
+    }
+    if (step === 2) {
+      setTimeout(() => {
+        document.getElementById('m3-reveal').classList.add('visible');
+      }, 500);
+    }
+  } catch(e) {
+    textEl.innerHTML = actErr(e.message);
+    btn.disabled = false;
+  }
+}
+
+async function runM3Custom(){
+  const input = document.getElementById('m3-custom');
+  const val = input.value.trim();
+  if (!val) { input.focus(); return; }
+  const btn = document.getElementById('m3-custom-btn');
+  const resp = document.getElementById('m3-cr');
+  const provEl = document.getElementById('m3-cp');
+  const textEl = document.getElementById('m3-ct');
+
+  btn.disabled = true; btn.textContent = 'Asking…';
+  resp.classList.add('visible');
+  provEl.textContent = '';
+  textEl.innerHTML = '<div class="act-loading"><div class="act-ld"></div><div class="act-ld"></div><div class="act-ld"></div><span class="act-ld-lbl">Asking the older AI…</span></div>';
+
+  try {
+    const data = await callWorker('/api/m3-cutoff', {step: 1, custom: val});
+    provEl.textContent = data.provider || '';
+    textEl.textContent = data.response;
+  } catch(e) {
+    textEl.innerHTML = actErr(e.message);
+  } finally {
+    btn.disabled = false; btn.textContent = 'Ask the older AI';
+  }
+}
+
+// ───── M4: Prompt Quality ─────
+async function runM4Compare(){
+  const btn = document.getElementById('m4-btn');
+  btn.disabled = true; btn.querySelector('span').textContent = 'Generating both…';
+  document.getElementById('m4-sbs').style.display = 'grid';
+  document.getElementById('m4-vague').innerHTML = actLoading();
+  document.getElementById('m4-specific').innerHTML = actLoading();
+  try {
+    const data = await callWorker('/api/m4-prompt-quality', {mode: 'compare'});
+    document.getElementById('m4-vague').textContent = data.vague;
+    document.getElementById('m4-specific').textContent = data.specific;
+    setTimeout(() => {
+      document.getElementById('m4-reveal').classList.add('visible');
+    }, 400);
+  } catch(e) {
+    document.getElementById('m4-vague').innerHTML = actErr(e.message);
+    document.getElementById('m4-specific').innerHTML = actErr(e.message);
+    btn.disabled = false; btn.querySelector('span').textContent = 'Generate both — compare side by side';
+  }
+}
+
+// ───── Prevent slide nav when typing in form fields ─────
+// Override the existing keydown handler defensively
+
+</script>
+</body>
+</html>
