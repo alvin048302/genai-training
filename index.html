@@ -1842,6 +1842,11 @@ function go(n){
   slides[C].classList.add('active');
   upd();
   setTimeout(()=>animateSlide(C),100);
+  // Update URL to reflect current slide (for shareable deep links)
+  if(typeof window !== 'undefined' && window.history && window.history.replaceState){
+    const newURL = window.location.pathname + '?slide=' + (C+1);
+    window.history.replaceState({slide: C}, '', newURL);
+  }
 }
 
 prevBtn.addEventListener('click',()=>go(C-1));
@@ -1871,8 +1876,33 @@ document.addEventListener('touchend',e=>{
   }
 });
 
-updateCounters();upd();
-setTimeout(()=>animateSlide(0),200);
+updateCounters();
+
+// Deep linking — parse ?slide=N URL parameter (1-indexed for human-friendly URLs)
+function getSlideFromURL(){
+  const params = new URLSearchParams(window.location.search);
+  const slideParam = parseInt(params.get('slide'));
+  if(!isNaN(slideParam) && slideParam >= 1 && slideParam <= TOTAL){
+    return slideParam - 1;  // Convert to 0-indexed
+  }
+  return 0;
+}
+
+const startSlide = getSlideFromURL();
+if(startSlide > 0){
+  // Jump directly to the target slide without animation
+  slides[0].classList.remove('active');
+  C = startSlide;
+  slides[C].classList.add('active');
+}
+upd();
+setTimeout(()=>animateSlide(C),200);
+
+// Handle browser back/forward
+window.addEventListener('popstate', (e) => {
+  const target = getSlideFromURL();
+  if(target !== C) go(target);
+});
 
 // ═══════════════════════════════════════════════
 // ACTIVITY JS — Worker calls + interaction handlers
