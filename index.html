@@ -449,8 +449,20 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 .impl-c h4{font-size:11.5px;font-weight:600;color:#7C2D12;margin-bottom:2px}
 .impl-c p{font-size:10.5px;line-height:1.5;color:#9A3412}
 
+/* Comparison table — Traditional vs Generative */
+.cmp-tbl{width:100%;border-collapse:collapse;font-size:11px}
+.cmp-tbl th,.cmp-tbl td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:middle}
+.cmp-tbl thead th{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);background:var(--off);border-bottom:2px solid var(--rule);text-align:center}
+.cmp-tbl thead th.col-feature{background:transparent;text-align:left;width:90px}
+.cmp-tbl thead th.col-ai{background:var(--m1bg);color:var(--m1)}
+.cmp-tbl td.col-feature{font-weight:700;color:var(--ink);font-size:11px}
+.cmp-tbl td.col-ai{background:rgba(219,234,254,0.4);color:var(--ink)}
+.cmp-tbl td.col-trad{color:var(--ink2)}
+
 @media(max-width:520px){
   .det-prob-grid,.impl-grid{grid-template-columns:1fr}
+  .cmp-tbl th,.cmp-tbl td{padding:7px 8px;font-size:10px}
+  .cmp-tbl thead th.col-feature{width:70px}
 }
 
 </style>
@@ -652,31 +664,39 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
     <p class="sub">Traditional software follows rules. Gen AI generates outputs. That single shift changes how you use it — and how you supervise it.</p>
 
     <div class="vis">
-      <div class="vis-in" style="background:linear-gradient(135deg,#F0F4FF,#EAF1FF);padding:14px">
-        <div class="compare-vis">
-          <div class="cmp-side fade-up" data-d="100">
-            <div class="cmp-icon">🔧</div>
-            <div class="cmp-title" style="color:var(--ink2)">Traditional AI</div>
-            <div class="cmp-flow">
-              <div class="cmp-step rigid">if A → do X</div>
-              <div class="cmp-step rigid">if B → do Y</div>
-              <div class="cmp-step rigid">if C → do Z</div>
-            </div>
-            <div style="font-size:9px;color:var(--ink3);margin-top:3px">Rules written by humans</div>
-          </div>
-          <div class="cmp-side fade-up" data-d="500" style="border-color:var(--m1l);background:var(--m1bg)">
-            <div class="cmp-icon">✨</div>
-            <div class="cmp-title" style="color:var(--m1)">Generative AI</div>
-            <div class="cmp-flow">
-              <div class="cmp-step" style="background:white;border-color:var(--m1l);color:var(--m1)">Learns patterns</div>
-              <div class="cmp-step" style="background:white;border-color:var(--m1l);color:var(--m1)">Adapts to anything</div>
-              <div class="cmp-step" style="background:white;border-color:var(--m1l);color:var(--m1)">Creates new output</div>
-            </div>
-            <div style="font-size:9px;color:var(--m1);margin-top:3px">Rules learned from data</div>
-          </div>
-        </div>
+      <div class="vis-in" style="background:white;padding:0;border:1px solid var(--rule)">
+        <table class="cmp-tbl">
+          <thead>
+            <tr>
+              <th class="col-feature"></th>
+              <th>Traditional Software</th>
+              <th class="col-ai">Generative AI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-feature">Input</td>
+              <td class="col-trad">Click button, fill form</td>
+              <td class="col-ai">Type a question or task</td>
+            </tr>
+            <tr>
+              <td class="col-feature">Output</td>
+              <td class="col-trad">Predetermined response</td>
+              <td class="col-ai">Fresh content each time</td>
+            </tr>
+            <tr>
+              <td class="col-feature">Behaviour</td>
+              <td class="col-trad">Follows fixed rules</td>
+              <td class="col-ai">Generates from learned patterns</td>
+            </tr>
+            <tr>
+              <td class="col-feature">Supervision</td>
+              <td class="col-trad">Test once, deploy</td>
+              <td class="col-ai">Verify each time it matters</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="vis-cap">From "follow my instructions" → to "figure it out yourself"</div>
     </div>
 
     <div class="analogy">
@@ -1485,7 +1505,7 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 <div class="slide" data-index="24" data-m="4">
   <div class="top-bar"><div class="sc" id="sc24"></div><div class="mb" style="background:var(--m4)">Module 4</div></div>
   <div class="body">
-    <div class="hd"><span class="lbl">Practical skill</span></div>
+    <div class="hd"><span class="lbl">Practical skill · Safeguard #2</span></div>
     <h2>Better prompts = better answers</h2>
     <p class="sub">Same AI. Different instructions. Completely different output quality. Prompting is the highest-leverage skill in working with AI.</p>
 
@@ -1498,13 +1518,25 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
             <div class="pc-result">→ Generic, unfocused, probably useless</div>
           </div>
           <div class="pcompare good fade-up" data-d="500">
-            <div class="pc-tag">✅ Clear prompt</div>
-            <div class="pc-pr">"Write a 200-word intro about AI for first-time users. Plain English. No jargon. Friendly tone."</div>
+            <div class="pc-tag">✅ Specific prompt</div>
+            <div class="pc-pr">"Write a 100-word intro about AI for a non-technical workplace audience. Plain English. Friendly tone. End with a question that gets readers thinking."</div>
             <div class="pc-result">→ Specific, ready-to-use, on point</div>
           </div>
         </div>
       </div>
       <div class="vis-cap">Five seconds more thinking saves five minutes editing</div>
+    </div>
+
+    <div style="padding:11px 14px;background:var(--off);border:1px solid var(--rule);border-radius:8px;margin-top:14px">
+      <div style="font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--m4);margin-bottom:8px">Five ingredients of a good prompt</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:6px">
+        <div style="display:flex;align-items:center;gap:5px"><span style="font-size:1rem">🎯</span><span style="font-size:10.5px;font-weight:600;color:var(--ink)">Audience</span></div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="font-size:1rem">📏</span><span style="font-size:10.5px;font-weight:600;color:var(--ink)">Length</span></div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="font-size:1rem">🎨</span><span style="font-size:10.5px;font-weight:600;color:var(--ink)">Tone</span></div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="font-size:1rem">📋</span><span style="font-size:10.5px;font-weight:600;color:var(--ink)">Format</span></div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="font-size:1rem">🎬</span><span style="font-size:10.5px;font-weight:600;color:var(--ink)">Action</span></div>
+      </div>
+      <div style="font-size:9.5px;font-style:italic;color:var(--ink3)">Who is it for? &nbsp;How long? &nbsp;What style? &nbsp;What structure? &nbsp;What should the reader do next?</div>
     </div>
 
     <div class="analogy">
@@ -1525,19 +1557,19 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 <div class="slide" data-index="25" data-m="4">
   <div class="top-bar"><div class="sc" id="sc25"></div><div class="mb" style="background:var(--m4)">Module 4</div></div>
   <div class="body">
-    <div class="hd"><span class="lbl">Governance</span></div>
+    <div class="hd"><span class="lbl">Governance · Safeguard #3 — International standard</span></div>
     <h2>Six principles for using AI responsibly</h2>
     <p class="sub">ISO/IEC 5338 — the international standard for AI lifecycle management. Six simple ideas that keep AI use safe.</p>
 
     <div class="vis">
       <div class="vis-in" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);padding:12px">
         <div class="iso-vis">
-          <div class="iso-c pop" data-d="100"><div class="ic">🔍</div><div class="nm">Transparency</div><div style="font-size:9px;color:var(--ink3);line-height:1.4">Tell people when AI is used</div></div>
-          <div class="iso-c pop" data-d="200"><div class="ic">👤</div><div class="nm">Accountability</div><div style="font-size:9px;color:var(--ink3);line-height:1.4">Someone owns the outcome</div></div>
-          <div class="iso-c pop" data-d="300"><div class="ic">⚠️</div><div class="nm">Risk Management</div><div style="font-size:9px;color:var(--ink3);line-height:1.4">Spot risks before deploying</div></div>
-          <div class="iso-c pop" data-d="400"><div class="ic">📋</div><div class="nm">Documentation</div><div style="font-size:9px;color:var(--ink3);line-height:1.4">Keep records of what AI did</div></div>
-          <div class="iso-c pop" data-d="500"><div class="ic">🔄</div><div class="nm">Lifecycle</div><div style="font-size:9px;color:var(--ink3);line-height:1.4">Monitor over time</div></div>
-          <div class="iso-c pop" data-d="600"><div class="ic">🛡️</div><div class="nm">Data</div><div style="font-size:9px;color:var(--ink3);line-height:1.4">Protect what goes in &amp; out</div></div>
+          <div class="iso-c pop" data-d="100"><div class="ic">🎯</div><div class="nm">Purpose</div><div style="font-size:9px;color:var(--ink3);line-height:1.4">Know why you're using AI for this task</div></div>
+          <div class="iso-c pop" data-d="200"><div class="ic">🔍</div><div class="nm">Transparency</div><div style="font-size:9px;color:var(--ink3);line-height:1.4">Be clear when AI is involved in decisions</div></div>
+          <div class="iso-c pop" data-d="300"><div class="ic">⚖️</div><div class="nm">Fairness</div><div style="font-size:9px;color:var(--ink3);line-height:1.4">Watch for bias in inputs and outputs</div></div>
+          <div class="iso-c pop" data-d="400"><div class="ic">🛡</div><div class="nm">Safety</div><div style="font-size:9px;color:var(--ink3);line-height:1.4">Build in checks; don't let AI act unsupervised</div></div>
+          <div class="iso-c pop" data-d="500"><div class="ic">📋</div><div class="nm">Accountability</div><div style="font-size:9px;color:var(--ink3);line-height:1.4">Someone owns the outcome — not the AI</div></div>
+          <div class="iso-c pop" data-d="600"><div class="ic">🔒</div><div class="nm">Privacy</div><div style="font-size:9px;color:var(--ink3);line-height:1.4">Don't share what shouldn't be shared</div></div>
         </div>
       </div>
       <div class="vis-cap">Six simple checks — applied consistently</div>
@@ -1547,7 +1579,7 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
       <div class="em">✈️</div>
       <div>
         <div class="ah">Analogy</div>
-        <p>Like the <strong>pre-flight safety checklist pilots run through every single takeoff</strong>. Boring. Repetitive. Essential. It's the reason flying is the safest form of travel — not the absence of risk, but the presence of disciplined process. AI governance works the same way.</p>
+        <p>Like the <strong>pre-flight safety checklist pilots run through every single takeoff</strong>. Boring. Repetitive. Essential. Not the absence of risk — the presence of disciplined process. AI governance works the same way.</p>
       </div>
     </div>
   </div>
@@ -1661,11 +1693,11 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
     <div class="vis">
       <div class="vis-in" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7);padding:12px">
         <div class="lit-vis">
-          <div class="lit-step fade-up" data-d="100"><div class="lit-n">1</div><div class="lit-text">Understand what AI is</div><div class="lit-bar"><div style="width:20%"></div></div></div>
-          <div class="lit-step fade-up" data-d="240"><div class="lit-n">2</div><div class="lit-text">Use it for real tasks</div><div class="lit-bar"><div style="width:40%"></div></div></div>
-          <div class="lit-step fade-up" data-d="380"><div class="lit-n">3</div><div class="lit-text">Spot when it's wrong</div><div class="lit-bar"><div style="width:60%"></div></div></div>
-          <div class="lit-step fade-up" data-d="520"><div class="lit-n">4</div><div class="lit-text">Apply governance principles</div><div class="lit-bar"><div style="width:80%"></div></div></div>
-          <div class="lit-step fade-up" data-d="660"><div class="lit-n">5</div><div class="lit-text">Translate AI for others</div><div class="lit-bar"><div style="width:100%"></div></div></div>
+          <div class="lit-step fade-up" data-d="100"><div class="lit-n">1</div><div class="lit-text"><strong>Aware</strong> — Know what AI is, how it differs from traditional software</div></div>
+          <div class="lit-step fade-up" data-d="240"><div class="lit-n">2</div><div class="lit-text"><strong>User</strong> — Use AI tools for everyday tasks (email, summaries, research)</div></div>
+          <div class="lit-step fade-up" data-d="380"><div class="lit-n">3</div><div class="lit-text"><strong>Critical</strong> — Spot when AI is wrong. Verify what matters. Refuse blind trust.</div></div>
+          <div class="lit-step fade-up" data-d="520"><div class="lit-n">4</div><div class="lit-text"><strong>Governor</strong> — Apply ISO-style principles. Manage AI use in teams and workflows.</div></div>
+          <div class="lit-step fade-up top" data-d="660" style="background:var(--m6bg);border-color:var(--m6l)"><div class="lit-n" style="background:var(--m6)">5</div><div class="lit-text"><strong style="color:var(--m6)">Translator</strong> — Explain AI to others. Bridge between technical and non-technical audiences.</div></div>
         </div>
       </div>
       <div class="vis-cap">Each step builds on the last — start where you are</div>
@@ -1689,23 +1721,30 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 <div class="slide" data-index="30" data-m="6">
   <div class="top-bar"><div class="sc" id="sc30"></div><div class="mb" style="background:var(--m6)">Module 5</div></div>
   <div class="body">
-    <div class="hd"><span class="lbl">The opportunity</span></div>
+    <div class="hd"><span class="lbl">The opportunity · The bridge</span></div>
     <h2>Domain expertise + AI capability</h2>
     <p class="sub">The most valuable professionals aren't the most technical or the most domain-rooted. They're the ones who can <strong>bridge both</strong>.</p>
 
     <div class="vis">
-      <div class="vis-in" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7);padding:14px">
-        <div class="bridge-vis">
-          <div class="br-side fly-in" data-d="100">
-            <div class="br-icon">🏦</div>
-            <div class="br-name">Domain Expertise</div>
-            <div class="br-sub">Industry knowledge<br>Stakeholder dynamics<br>Real-world judgment</div>
+      <div class="vis-in" style="background:white;padding:14px">
+        <div style="display:grid;grid-template-columns:1fr 70px 1fr;gap:0;align-items:stretch;width:100%">
+          <div class="fly-in" data-d="100" style="padding:16px 14px;background:var(--m6bg);border:1px solid var(--m6l);border-left:3px solid var(--m6);border-radius:8px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:8px">
+            <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--m6)">Domain Expertise</div>
+            <div style="font-size:13px;font-weight:700;color:var(--ink)">Industry knowledge</div>
+            <div style="font-size:10px;line-height:1.6;color:var(--ink2)">Sector regulations<br>Client relationships<br>Professional judgement<br>Context that matters</div>
           </div>
-          <div class="br-plus pop" data-d="500">+</div>
-          <div class="br-side fly-in-r" data-d="900">
-            <div class="br-icon">🤖</div>
-            <div class="br-name">AI Capability</div>
-            <div class="br-sub">Effective prompting<br>Critical evaluation<br>Building real tools</div>
+          <div class="pop" data-d="500" style="display:flex;align-items:center;justify-content:center;position:relative">
+            <div style="position:absolute;left:0;right:0;top:50%;height:1px;background:var(--rule);z-index:0"></div>
+            <div style="width:62px;height:62px;border-radius:50%;background:white;border:2px solid var(--m4);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1;position:relative">
+              <div style="font-size:1.1rem;line-height:1">⭐</div>
+              <div style="font-family:'Fraunces',serif;font-size:11px;font-weight:600;color:var(--m4)">Bridge</div>
+              <div style="font-size:7.5px;font-style:italic;color:var(--ink3)">Rare. Valuable.</div>
+            </div>
+          </div>
+          <div class="fly-in-r" data-d="900" style="padding:16px 14px;background:var(--m2bg);border:1px solid var(--m2l);border-left:3px solid var(--m2);border-radius:8px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:8px">
+            <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--m2)">AI Capability</div>
+            <div style="font-size:13px;font-weight:700;color:var(--ink)">Tool fluency</div>
+            <div style="font-size:10px;line-height:1.6;color:var(--ink2)">Prompting skill<br>Verify outputs<br>Know what to use<br>Know what to avoid</div>
           </div>
         </div>
       </div>
@@ -1775,32 +1814,38 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 <div class="slide" data-index="33" data-m="5">
   <div class="top-bar"><div class="sc" id="sc33"></div><div class="mb" style="background:var(--m5)">Bonus</div></div>
   <div class="body">
-    <div class="hd"><span class="lbl">Case study — FORGE</span></div>
+    <div class="hd"><span class="lbl">★ Bonus — How it works</span></div>
     <h2>From a brief to a programme — in minutes</h2>
     <p class="sub">FORGE turns a single training brief into a complete programme structure with KSAs, outcomes, sessions, and assessments.</p>
 
     <div class="vis">
-      <div class="vis-in" style="background:linear-gradient(135deg,#EEF2FF,#E0E7FF);padding:14px">
-        <div class="forge-vis">
-          <div class="forge-in fly-in" data-d="100">
-            <div class="forge-h">📝 Your brief</div>
-            <div class="forge-line">3-hour workshop</div>
-            <div class="forge-line">New financial advisers</div>
-            <div class="forge-line">Insurance basics</div>
+      <div class="vis-in" style="background:white;padding:14px">
+        <div style="display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr;gap:0;align-items:stretch;width:100%">
+          <div class="fly-in" data-d="100" style="padding:14px 12px;background:var(--off);border:1px solid var(--rule);border-radius:8px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:8px">
+            <div style="font-size:1.5rem">📝</div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--ink3)">The Brief</div>
+            <div style="font-size:10.5px;line-height:1.6;color:var(--ink2)">Audience<br>Duration<br>Learning goals<br>Constraints</div>
           </div>
-          <div class="flow-mid pop" data-d="500">
-            <div class="ai-pill-lg" style="--accent:var(--m5)"><div class="em">🔨</div><div class="tx">FORGE</div></div>
+          <div class="fade-up" data-d="350" style="display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--ink3)">→</div>
+          <div class="pop" data-d="500" style="padding:14px 12px;background:var(--m5bg);border:1px solid var(--m5l);border-radius:8px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:8px">
+            <div style="font-size:1.5rem">🔨</div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--m5)">FORGE Engine</div>
+            <div style="font-size:10.5px;line-height:1.6;color:var(--ink)">Multi-phase wizard<br>KSA tagging<br>Gap-aware design<br>Review &amp; refine</div>
           </div>
-          <div class="forge-out fly-in-r" data-d="900">
-            <div class="forge-h">📚 Full programme</div>
-            <div class="forge-line">Learning objectives</div>
-            <div class="forge-line">Session outline</div>
-            <div class="forge-line">Activities &amp; quiz</div>
-            <div class="forge-line">Facilitator guide</div>
+          <div class="fade-up" data-d="750" style="display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--ink3)">→</div>
+          <div class="fly-in-r" data-d="900" style="padding:14px 12px;background:var(--m4bg);border:1px solid var(--m4l);border-radius:8px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:8px">
+            <div style="font-size:1.5rem">📚</div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--m4)">The Programme</div>
+            <div style="font-size:10.5px;line-height:1.6;color:var(--ink2)">Outcomes<br>Sessions<br>Assessments<br>Facilitator notes</div>
           </div>
         </div>
       </div>
       <div class="vis-cap">Days of design work → minutes of skilled iteration</div>
+    </div>
+
+    <div style="padding:11px 14px;background:var(--off);border:1px solid var(--rule);border-radius:8px;margin-top:14px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:11px;line-height:1.5">
+      <div><strong style="color:var(--ink)">Manual approach:</strong> <span style="color:var(--ink2)">2-3 weeks · multiple stakeholders · iterative drafts</span></div>
+      <div><strong style="color:var(--m5)">FORGE:</strong> <span style="color:var(--ink2)">Initial draft in 15 minutes, refined in 1-2 hours</span></div>
     </div>
 
     <div class="analogy">
@@ -1810,6 +1855,10 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
         <p>Like an <strong>architect's first blueprint</strong>. The architect doesn't draw every line by hand any more — software produces a structured draft from the brief. The architect then refines it, adds judgment, and signs off. <strong>FORGE does the same for learning programmes.</strong></p>
       </div>
     </div>
+
+    <div class="impacts">
+      <div class="imp"><div class="imp-i">⚡</div><div><h4>What this proves</h4><p>Gen AI can compress weeks of L&amp;D work into hours — <strong>without compromising structure or quality</strong>.</p></div></div>
+    </div>
   </div>
 </div>
 
@@ -1817,32 +1866,40 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 <div class="slide" data-index="34" data-m="5">
   <div class="top-bar"><div class="sc" id="sc34"></div><div class="mb" style="background:var(--m5)">Bonus</div></div>
   <div class="body">
-    <div class="hd"><span class="lbl">How it delivers</span></div>
+    <div class="hd"><span class="lbl">★ Bonus — Why it matters</span></div>
     <h2>Fast. Scalable. Real outputs.</h2>
     <p class="sub">FORGE isn't a slide deck or a pitch. It's a working tool, deployed and tested. Here's what makes it real.</p>
 
     <div class="vis">
-      <div class="vis-in" style="background:linear-gradient(135deg,#EEF2FF,#E0E7FF);padding:14px">
-        <div class="three-pillars">
-          <div class="pc pop" data-d="100"><div class="ic">⚡</div><div class="nm">Fast</div><div class="ds">A brief becomes a programme draft in minutes — not days.</div></div>
-          <div class="pc pop" data-d="280"><div class="ic">📐</div><div class="nm">Scalable</div><div class="ds">One person produces what used to need a full team.</div></div>
-          <div class="pc pop" data-d="460"><div class="ic">🎯</div><div class="nm">Applied</div><div class="ds">Real, structured, professional-quality outputs.</div></div>
+      <div class="vis-in" style="background:white;padding:14px">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;width:100%">
+          <div class="pop" data-d="100" style="padding:16px 14px;background:var(--m5bg);border:1px solid var(--m5l);border-left:3px solid var(--m5);border-radius:8px;display:flex;flex-direction:column;gap:8px">
+            <div style="font-size:1.5rem">⚡</div>
+            <div style="font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:var(--m5)">Fast</div>
+            <div style="font-size:10.5px;line-height:1.55;color:var(--ink2)">Multi-phase wizard reduces 2-3 weeks of design work to a few hours. Iterative refinement, not blank-page panic.</div>
+          </div>
+          <div class="pop" data-d="280" style="padding:16px 14px;background:var(--m5bg);border:1px solid var(--m5l);border-left:3px solid var(--m5);border-radius:8px;display:flex;flex-direction:column;gap:8px">
+            <div style="font-size:1.5rem">📈</div>
+            <div style="font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:var(--m5)">Scalable</div>
+            <div style="font-size:10.5px;line-height:1.55;color:var(--ink2)">Single-file HTML, deployed via GitHub Pages, API on Cloudflare Worker. No infrastructure team needed.</div>
+          </div>
+          <div class="pop" data-d="460" style="padding:16px 14px;background:var(--m5bg);border:1px solid var(--m5l);border-left:3px solid var(--m5);border-radius:8px;display:flex;flex-direction:column;gap:8px">
+            <div style="font-size:1.5rem">✅</div>
+            <div style="font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:var(--m5)">Real outputs</div>
+            <div style="font-size:10.5px;line-height:1.55;color:var(--ink2)">Generates KSA-tagged outcomes, sessions, assessments. Editable. Auditable. Production-ready.</div>
+          </div>
         </div>
       </div>
       <div class="vis-cap">Effort shifts from production to curation — the higher-value work</div>
     </div>
 
-    <div style="margin-bottom:14px">
-      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px">Example brief used in FORGE</div>
-      <div class="pbox">"Design a 3-hour workshop for new financial advisers with no prior insurance background. Include 2 scenario exercises, a short quiz, and a facilitator debrief guide."</div>
+    <div style="padding:11px 14px;background:var(--off);border:1px solid var(--rule);border-radius:8px;margin-top:14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <div style="font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3)">Stack</div>
+      <div style="font-family:'Courier New',monospace;font-size:11px;color:var(--ink)">Single-file HTML &nbsp;·&nbsp; Anthropic API &nbsp;·&nbsp; Cloudflare Worker &nbsp;·&nbsp; GitHub Pages</div>
     </div>
 
-    <div class="analogy">
-      <div class="em">🤝</div>
-      <div>
-        <div class="ah">Analogy</div>
-        <p>The best output comes from <strong>AI + human, working together</strong> — like a junior assistant who drafts everything, and you, the senior expert, who shapes the final version. FORGE shows what that partnership looks like in practice.</p>
-      </div>
+    <div class="impacts">
+      <div class="imp"><div class="imp-i">🌉</div><div><h4>The bridge in action</h4><p>L&amp;D domain knowledge + AI capability = <strong>a tool that didn't exist before</strong>.</p></div></div>
     </div>
   </div>
 </div>
