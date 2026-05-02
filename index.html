@@ -417,6 +417,42 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 .close-cta .cta-arrow{margin-left:4px;transition:transform .2s}
 .close-cta:hover .cta-arrow{transform:translateX(2px)}
 
+
+/* ═══ Probabilistic callout (Module 1 — How It Works) ═══ */
+.prob-callout{margin-top:14px;padding:14px 16px;border-radius:10px;background:linear-gradient(135deg,#F0F4FF,#EAF1FF);border:1px solid var(--m1l)}
+.prob-h{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--m1);margin-bottom:6px}
+.prob-text{font-size:13px;line-height:1.6;color:var(--ink2);margin-bottom:12px}
+.prob-text strong{color:var(--ink)}
+.prob-bar-block{background:white;border:1px solid var(--m1l);border-radius:8px;padding:11px 13px}
+.prob-bar-q{font-family:'Courier New',monospace;font-size:11px;color:var(--ink);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--rule)}
+.prob-bar{position:relative;height:18px;background:var(--off);border-radius:3px;margin-bottom:4px;overflow:hidden;display:flex;align-items:center}
+.prob-fill{position:absolute;top:0;left:0;bottom:0;border-radius:3px;transition:width .8s ease}
+.prob-lbl{position:relative;z-index:1;padding-left:8px;font-size:10.5px;color:var(--ink);font-weight:500}
+.prob-cap{font-size:10px;color:var(--ink3);font-style:italic;margin-top:8px;text-align:center}
+
+
+/* ═══ Module 3 — Same question, different answer ═══ */
+.det-prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%}
+.dp-card{padding:13px;border-radius:9px;display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center;background:white;border:1px solid var(--rule)}
+.dp-det{border-left:3px solid var(--ink2)}
+.dp-prob{border-left:3px solid var(--m3)}
+.dp-h{font-size:13px;font-weight:700;color:var(--ink)}
+.dp-sub{font-size:10px;color:var(--ink3);font-style:italic;margin-bottom:3px}
+.dp-list{display:flex;flex-direction:column;gap:3px;width:100%}
+.dp-list>div{font-size:11px;color:var(--ink2);background:var(--off);padding:4px 8px;border-radius:4px}
+.dp-rule{font-size:10.5px;font-weight:600;color:var(--ink);margin-top:4px;padding-top:6px;border-top:1px solid var(--rule);width:100%}
+.dp-tag{font-size:10px;color:var(--ink3);font-style:italic}
+
+.impl-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.impl-c{display:flex;align-items:flex-start;gap:9px;padding:10px 12px;border-radius:8px;background:var(--m3bg);border:1px solid var(--m3l)}
+.impl-i{font-size:1.05rem;flex-shrink:0;margin-top:1px}
+.impl-c h4{font-size:11.5px;font-weight:600;color:#7C2D12;margin-bottom:2px}
+.impl-c p{font-size:10.5px;line-height:1.5;color:#9A3412}
+
+@media(max-width:520px){
+  .det-prob-grid,.impl-grid{grid-template-columns:1fr}
+}
+
 </style>
 </head>
 <body>
@@ -527,7 +563,7 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
           <div class="stg-arrow fade-up" data-d="350">↓</div>
           <div class="stg fade-up" data-d="500"><div class="stg-n">2</div><div class="stg-icon">🧠</div><div><div class="stg-lbl">Learn patterns</div><div style="font-size:9px;color:var(--ink3)">How words and ideas connect</div></div></div>
           <div class="stg-arrow fade-up" data-d="750">↓</div>
-          <div class="stg fade-up" data-d="900"><div class="stg-n">3</div><div class="stg-icon">✍️</div><div><div class="stg-lbl">Generate</div><div style="font-size:9px;color:var(--ink3)">Compose your answer in real time</div></div></div>
+          <div class="stg fade-up" data-d="900"><div class="stg-n">3</div><div class="stg-icon">✍️</div><div><div class="stg-lbl">Generate</div><div style="font-size:9px;color:var(--ink3)">Predict next word from probabilities — sample from possibilities, not pick "the right one"</div></div></div>
         </div>
       </div>
       <div class="vis-cap">One long training. Then instant answers, forever after.</div>
@@ -544,6 +580,19 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
     <div class="impacts">
       <div class="imp"><div class="imp-i">🌍</div><div><h4>The scale is staggering</h4><p>Modern AI training datasets contain more text than any human could read in a thousand lifetimes. That's why AI feels like it knows everything — within the boundary of its training data.</p></div></div>
       <div class="imp"><div class="imp-i">⏰</div><div><h4>Knowledge has a date</h4><p>The student "graduated" at some point — usually months or a year ago. They don't know what's happened since.</p></div></div>
+    </div>
+
+    <div class="prob-callout">
+      <div class="prob-h">🎲 Probabilistic, not deterministic</div>
+      <div class="prob-text">Unlike a calculator (where 2+2 always equals 4), AI samples from a distribution of likely next words. <strong>Same question → similar but distinct answers every time.</strong> This is why Activity 1 shows two different responses.</div>
+      <div class="prob-bar-block">
+        <div class="prob-bar-q">Question: "The capital of France is..."</div>
+        <div class="prob-bar"><div class="prob-fill" style="width:92%;background:var(--m1)"></div><span class="prob-lbl"><strong>Paris</strong> · 92%</span></div>
+        <div class="prob-bar"><div class="prob-fill" style="width:5%;background:#93C5FD"></div><span class="prob-lbl">"the" · 5%</span></div>
+        <div class="prob-bar"><div class="prob-fill" style="width:2%;background:#BFDBFE"></div><span class="prob-lbl">"located" · 2%</span></div>
+        <div class="prob-bar"><div class="prob-fill" style="width:1%;background:#DBEAFE"></div><span class="prob-lbl">other · 1%</span></div>
+        <div class="prob-cap">AI samples from this distribution → output varies, even on factual questions</div>
+      </div>
     </div>
   </div>
 </div>
@@ -1168,9 +1217,68 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
   </div>
 </div>
 
-<!-- ░░░ S12: OTHER 4 RISKS ░░░ -->
+<!-- ░░░ NEW: Same question, different answer ░░░ -->
 <div class="slide" data-index="18" data-m="3">
   <div class="top-bar"><div class="sc" id="sc18"></div><div class="mb" style="background:var(--m3)">Module 3</div></div>
+  <div class="body">
+    <div class="hd"><span class="lbl">The variability property</span></div>
+    <h2>Same question, different answer</h2>
+    <p class="sub">AI is <strong>probabilistic</strong> — and that creates real governance challenges in workplaces.</p>
+
+    <div class="vis">
+      <div class="vis-in" style="background:linear-gradient(135deg,#FFF7ED,#FFEDD5);padding:14px">
+        <div class="det-prob-grid">
+          <div class="dp-card dp-det fade-up" data-d="100">
+            <div class="dp-h">⚙️ Deterministic</div>
+            <div class="dp-sub">Traditional software</div>
+            <div class="dp-list">
+              <div>Calculator</div>
+              <div>Database query</div>
+              <div>Excel formula</div>
+            </div>
+            <div class="dp-rule">Same input → same output</div>
+            <div class="dp-tag">Predictable. Auditable.</div>
+          </div>
+          <div class="dp-card dp-prob fade-up" data-d="350">
+            <div class="dp-h">🎲 Probabilistic</div>
+            <div class="dp-sub">Generative AI</div>
+            <div class="dp-list">
+              <div>ChatGPT</div>
+              <div>Claude</div>
+              <div>Gemini</div>
+            </div>
+            <div class="dp-rule">Same input → different output</div>
+            <div class="dp-tag">Creative. Variable. Harder to audit.</div>
+          </div>
+        </div>
+      </div>
+      <div class="vis-cap">Almost all business software is deterministic — Gen AI breaks that assumption</div>
+    </div>
+
+    <div class="impl-grid">
+      <div class="impl-c"><div class="impl-i">📋</div><div><h4>Reproducibility</h4><p>Can't replay the exact same output from yesterday — affects audit trails and compliance.</p></div></div>
+      <div class="impl-c"><div class="impl-i">🔍</div><div><h4>Quality control</h4><p>Output is a range, not a value. Testing AI is judging "good enough", not "right or wrong".</p></div></div>
+      <div class="impl-c"><div class="impl-i">🎭</div><div><h4>Brand consistency</h4><p>Without guardrails, customers can get different tones from the same prompt across your team.</p></div></div>
+      <div class="impl-c"><div class="impl-i">❓</div><div><h4>Decision auditability</h4><p>"Why did the AI suggest this?" — even the same prompt may produce different reasoning.</p></div></div>
+    </div>
+
+    <div class="analogy">
+      <div class="em">🍳</div>
+      <div>
+        <div class="ah">Analogy</div>
+        <p>Like a <strong>skilled chef vs a vending machine</strong>. The vending machine gives you exactly what's labelled, every time — predictable, but limited. The chef adapts to what's fresh that day — creative, but each plate looks slightly different. <strong>The variation is what makes AI useful. The variation is also what makes it harder to govern.</strong></p>
+      </div>
+    </div>
+
+    <div class="impacts">
+      <div class="imp"><div class="imp-i">✅</div><div><h4>The fix</h4><p>Tight prompts. Human review. Documented use cases. Don't outlaw AI for what it is — design your processes around what it does.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ S12: OTHER 4 RISKS ░░░ -->
+<div class="slide" data-index="19" data-m="3">
+  <div class="top-bar"><div class="sc" id="sc19"></div><div class="mb" style="background:var(--m3)">Module 3</div></div>
   <div class="body">
     <div class="hd"><span class="lbl">Risks 2–5</span></div>
     <h2>Four more limits to remember</h2>
@@ -1215,9 +1323,9 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 </div>
 
 <!-- ░░░ M3 ACTIVITY: Frozen in Time ░░░ -->
-<div class="slide act-color" data-index="19" data-m="3">
+<div class="slide act-color" data-index="20" data-m="3">
   <div class="top-bar">
-    <div class="sc" id="sc19"></div>
+    <div class="sc" id="sc20"></div>
     <div class="act-time">⏱ 5 min</div>
   </div>
   <div class="body">
@@ -1278,8 +1386,8 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 
 
 <!-- ░░░ S13: M4 DIVIDER ░░░ -->
-<div class="slide" data-index="20" data-m="4">
-  <div class="top-bar"><div class="sc" id="sc20"></div></div>
+<div class="slide" data-index="21" data-m="4">
+  <div class="top-bar"><div class="sc" id="sc21"></div></div>
   <div class="div-grid">
     <div class="div-l"><div class="div-idx">Module 04</div><div class="div-num">04</div></div>
     <div class="div-r">
@@ -1291,8 +1399,8 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 </div>
 
 <!-- ░░░ S14: HUMAN IN LOOP ░░░ -->
-<div class="slide" data-index="21" data-m="4">
-  <div class="top-bar"><div class="sc" id="sc21"></div><div class="mb" style="background:var(--m4)">Module 4</div></div>
+<div class="slide" data-index="22" data-m="4">
+  <div class="top-bar"><div class="sc" id="sc22"></div><div class="mb" style="background:var(--m4)">Module 4</div></div>
   <div class="body">
     <div class="hd"><span class="lbl">Core principle</span></div>
     <h2>Human in the Loop</h2>
@@ -1329,8 +1437,8 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 </div>
 
 <!-- ░░░ S15: PROMPT QUALITY ░░░ -->
-<div class="slide" data-index="22" data-m="4">
-  <div class="top-bar"><div class="sc" id="sc22"></div><div class="mb" style="background:var(--m4)">Module 4</div></div>
+<div class="slide" data-index="23" data-m="4">
+  <div class="top-bar"><div class="sc" id="sc23"></div><div class="mb" style="background:var(--m4)">Module 4</div></div>
   <div class="body">
     <div class="hd"><span class="lbl">Practical skill</span></div>
     <h2>Better prompts = better answers</h2>
@@ -1369,8 +1477,8 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 </div>
 
 <!-- ░░░ S16: ISO 5338 ░░░ -->
-<div class="slide" data-index="23" data-m="4">
-  <div class="top-bar"><div class="sc" id="sc23"></div><div class="mb" style="background:var(--m4)">Module 4</div></div>
+<div class="slide" data-index="24" data-m="4">
+  <div class="top-bar"><div class="sc" id="sc24"></div><div class="mb" style="background:var(--m4)">Module 4</div></div>
   <div class="body">
     <div class="hd"><span class="lbl">Governance</span></div>
     <h2>Six principles for using AI responsibly</h2>
@@ -1401,9 +1509,9 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 </div>
 
 <!-- ░░░ M4 ACTIVITY: Same Task, Two Prompts ░░░ -->
-<div class="slide act-color" data-index="24" data-m="4">
+<div class="slide act-color" data-index="25" data-m="4">
   <div class="top-bar">
-    <div class="sc" id="sc24"></div>
+    <div class="sc" id="sc25"></div>
     <div class="act-time">⏱ 5 min</div>
   </div>
   <div class="body">
@@ -1453,9 +1561,9 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 
 
 <!-- ░░░ S20: M6 DIVIDER (OPTIONAL) ░░░ -->
-<div class="slide" data-index="25" data-m="6">
+<div class="slide" data-index="26" data-m="6">
   <div class="top-bar">
-    <div class="sc" id="sc25"></div>
+    <div class="sc" id="sc26"></div>
     </div>
   <div class="div-grid">
     <div class="div-l"><div class="div-idx" style="color:var(--m6)">Module 05</div><div class="div-num">05</div></div>
@@ -1468,8 +1576,8 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 </div>
 
 <!-- ░░░ S21: SINGAPORE ░░░ -->
-<div class="slide" data-index="26" data-m="6">
-  <div class="top-bar"><div class="sc" id="sc26"></div><div class="mb" style="background:var(--m6)">Module 5</div></div>
+<div class="slide" data-index="27" data-m="6">
+  <div class="top-bar"><div class="sc" id="sc27"></div><div class="mb" style="background:var(--m6)">Module 5</div></div>
   <div class="body">
     <div class="hd"><span class="lbl">Singapore context</span></div>
     <h2>How Singapore is approaching AI</h2>
@@ -1498,8 +1606,8 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 </div>
 
 <!-- ░░░ S22: AI LITERACY ░░░ -->
-<div class="slide" data-index="27" data-m="6">
-  <div class="top-bar"><div class="sc" id="sc27"></div><div class="mb" style="background:var(--m6)">Module 5</div></div>
+<div class="slide" data-index="28" data-m="6">
+  <div class="top-bar"><div class="sc" id="sc28"></div><div class="mb" style="background:var(--m6)">Module 5</div></div>
   <div class="body">
     <div class="hd"><span class="lbl">What AI literacy means</span></div>
     <h2>Five levels of being AI-literate</h2>
@@ -1529,8 +1637,8 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 </div>
 
 <!-- ░░░ S23: BRIDGE ░░░ -->
-<div class="slide" data-index="28" data-m="6">
-  <div class="top-bar"><div class="sc" id="sc28"></div><div class="mb" style="background:var(--m6)">Module 5</div></div>
+<div class="slide" data-index="29" data-m="6">
+  <div class="top-bar"><div class="sc" id="sc29"></div><div class="mb" style="background:var(--m6)">Module 5</div></div>
   <div class="body">
     <div class="hd"><span class="lbl">The opportunity</span></div>
     <h2>Domain expertise + AI capability</h2>
@@ -1570,14 +1678,14 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 </div>
 
 <!-- ░░░ S24: CLOSING ░░░ -->
-<div class="slide" data-index="29" data-m="0">
-  <div class="top-bar"><div class="sc" id="sc29"></div></div>
+<div class="slide" data-index="30" data-m="0">
+  <div class="top-bar"><div class="sc" id="sc30"></div></div>
   <div class="close-w">
     <div style="width:32px;height:1px;background:var(--rule);margin:0 auto 28px;position:relative"></div>
     <div class="close-q">"The question isn't whether AI will change your work. It already has. The question is whether you will be someone who shapes that change — or someone it simply happens to."</div>
     <div class="close-name">Alvin Nambiar</div>
     <div class="close-role">L&D Professional · Financial Services · AI Practitioner</div>
-    <button class="close-cta" onclick="go(30)">
+    <button class="close-cta" onclick="go(31)">
       <span class="cta-icon">📘</span>
       <span>Read the FORGE case study</span>
       <span class="cta-arrow">→</span>
@@ -1586,8 +1694,8 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 </div>
 
 <!-- ░░░ S17: M5 DIVIDER (FORGE) ░░░ -->
-<div class="slide" data-index="30" data-m="5">
-  <div class="top-bar"><div class="sc" id="sc30"></div></div>
+<div class="slide" data-index="31" data-m="5">
+  <div class="top-bar"><div class="sc" id="sc31"></div></div>
   <div class="div-grid">
     <div class="div-l"><div class="div-idx" style="color:var(--m5)">Bonus Reading</div><div class="div-num">★</div></div>
     <div class="div-r">
@@ -1599,8 +1707,8 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 </div>
 
 <!-- ░░░ S18: FORGE HERO ░░░ -->
-<div class="slide" data-index="31" data-m="5">
-  <div class="top-bar"><div class="sc" id="sc31"></div><div class="mb" style="background:var(--m5)">Bonus</div></div>
+<div class="slide" data-index="32" data-m="5">
+  <div class="top-bar"><div class="sc" id="sc32"></div><div class="mb" style="background:var(--m5)">Bonus</div></div>
   <div class="body">
     <div class="hd"><span class="lbl">Case study — FORGE</span></div>
     <h2>From a brief to a programme — in minutes</h2>
@@ -1641,8 +1749,8 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 </div>
 
 <!-- ░░░ S19: FORGE IN PRACTICE ░░░ -->
-<div class="slide" data-index="32" data-m="5">
-  <div class="top-bar"><div class="sc" id="sc32"></div><div class="mb" style="background:var(--m5)">Bonus</div></div>
+<div class="slide" data-index="33" data-m="5">
+  <div class="top-bar"><div class="sc" id="sc33"></div><div class="mb" style="background:var(--m5)">Bonus</div></div>
   <div class="body">
     <div class="hd"><span class="lbl">How it delivers</span></div>
     <h2>Fast. Scalable. Real outputs.</h2>
@@ -1684,13 +1792,13 @@ h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:400
 </div>
 
 <script>
-const TOTAL=33;let C=0;
+const TOTAL=34;let C=0;
 const slides=document.querySelectorAll('.slide');
 const pf=document.getElementById('pf');
 const prevBtn=document.getElementById('prevBtn');
 const nextBtn=document.getElementById('nextBtn');
 const dots=document.getElementById('dots');
-const modCols=['#374151','#1D4ED8','#1D4ED8','#1D4ED8','#1D4ED8','#1D4ED8','#1D4ED8','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#C2410C','#C2410C','#C2410C','#C2410C','#0D7461','#0D7461','#0D7461','#0D7461','#0D7461','#B45309','#B45309','#B45309','#B45309','#374151','#4F46E5','#4F46E5','#4F46E5'];
+const modCols=['#374151','#1D4ED8','#1D4ED8','#1D4ED8','#1D4ED8','#1D4ED8','#1D4ED8','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#0891B2','#C2410C','#C2410C','#C2410C','#C2410C','#C2410C','#0D7461','#0D7461','#0D7461','#0D7461','#0D7461','#B45309','#B45309','#B45309','#B45309','#374151','#4F46E5','#4F46E5','#4F46E5'];
 
 for(let i=0;i<TOTAL;i++){
   const d=document.createElement('button');
